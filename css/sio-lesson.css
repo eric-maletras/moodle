@@ -1,0 +1,152 @@
+/* === SIO Leçon — Palette & Composants (v1) ============================== */
+:root{
+  --sio-bg:#0b1220; --sio-card:#111a2e; --sio-muted:#8aa0b3;
+  --sio-accent:#00e5ff; --sio-accent2:#6dd5ff; --sio-title:#e8f1ff;
+  --sio-ok:#3ad29f; --sio-warn:#ffc857; --sio-radius:14px;
+}
+
+/* Wrapper */
+.sio{
+  font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;
+  line-height:1.55; color:#d8e6f3; background:var(--sio-bg);
+  padding:22px; border-radius:var(--sio-radius);
+  box-shadow:0 0 0 1px rgba(0,229,255,.05) inset;  
+}
+.sio *{box-sizing:border-box}
+
+/* Banner */
+.sio .banner{
+  position:relative; border-radius:18px; overflow:hidden;
+  background:
+    radial-gradient(1200px 300px at 10% -10%, rgba(0,229,255,.15), transparent 60%),
+    linear-gradient(135deg,#0f2027 0%, #203a43 35%, #2c5364 100%);
+  padding:22px; min-height:110px;
+}
+.sio .banner h1{margin:.2em 0 0; font-size:26px; color:var(--sio-title); font-weight:800;
+  text-shadow:0 0 18px rgba(0,229,255,.25);}
+.sio .eyebrow{font-size:12px; letter-spacing:.12em; color:var(--sio-accent2);
+  text-transform:uppercase; font-weight:700}
+
+/* Cards & notes */
+.sio .card{
+  background:var(--sio-card); border-radius:12px; padding:16px;
+  box-shadow:0 2px 12px rgba(0,0,0,.25), 0 0 0 1px rgba(0,229,255,.08) inset;
+}
+.sio .note-accent{
+  background:linear-gradient(180deg, rgba(0,229,255,.08), rgba(0,229,255,.02));
+  border:1px solid rgba(0,229,255,.12); border-radius:12px; padding:14px;
+}
+.sio .note-ok{
+  background:linear-gradient(180deg, rgba(58,210,159,.12), rgba(58,210,159,.05));
+  border:1px solid rgba(58,210,159,.25); border-radius:12px; padding:14px; color:#eafff6;
+}
+.sio .note-warn{
+  background:linear-gradient(180deg, rgba(255,200,87,.10), rgba(255,200,87,.04));
+  border:1px solid rgba(255,200,87,.35); border-radius:12px; padding:12px; color:#ffe8b3;
+}
+
+/* Grids */
+.sio .grid{display:grid; gap:14px}
+.sio .grid-3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.sio .cols-2-fixed{display:grid; gap:14px; align-items:center;
+  grid-template-columns:minmax(260px,1fr) minmax(320px,1.2fr)}
+@media (max-width:720px){ .sio .cols-2-fixed{grid-template-columns:1fr} }
+
+/* Media */
+.sio img, .sio .media{max-width:100%; border-radius:10px; display:block}
+.sio .placeholder{
+  border:1px dashed rgba(0,229,255,.35); border-radius:12px; aspect-ratio:16/9;
+  min-height:180px; display:flex; align-items:center; justify-content:center;
+  color:var(--sio-muted); font-size:13px;
+}
+
+/* Table */
+.sio table{width:100%; border-collapse:collapse; font-size:14px}
+.sio thead tr{background:rgba(0,229,255,.12); color:#e8faff}
+.sio th, .sio td{padding:8px; border-top:1px solid rgba(255,255,255,.07); text-align:left}
+
+/* Choices (pour les questions) */
+.sio .choice{
+  display:block; margin:8px 0; padding:12px 14px; border-radius:12px;
+  background:#0f1628; color:#e8f1ff; font-size:15px;
+  border:1px solid rgba(0,229,255,.45);
+  box-shadow:0 0 0 1px rgba(0,229,255,.12) inset, 0 6px 18px rgba(0,0,0,.28);
+}
+
+/* Badges, hr */
+.sio .badge{font-size:12px; color:var(--sio-accent2); text-transform:uppercase; letter-spacing:.08em; font-weight:700}
+.sio .hr{height:2px; background:linear-gradient(90deg, rgba(0,229,255,.35), transparent 70%); border-radius:2px; margin-top:18px}
+
+/* Blocs de code multi-lignes */
+/* ——— 1) Variante "bloc" pour <code> avec le même look que <pre> ——— */
+/* Utilise <code class="code-block"> ... </code> */
+.sio code.code-block {
+  display: block;                         /* <code> devient un bloc */
+  background: #0f172a !important;
+  color: #e5e7eb !important;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin: 0.5rem 0 1rem;
+  font: 0.95rem/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  white-space: pre;                        /* respecte l'indentation */
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Évite le double-style si un code-block est placé par erreur dans un <pre> */
+.sio pre code.code-block {
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: inline;                         /* on revient au flux normal */
+}
+
+.sio pre {
+  color: #dae0e8;
+}
+.sio table tr > th,
+.sio table tr > td {
+  color: #dae0e8; /* ou #e5e7eb si fond sombre */
+}
+
+/* ——— 2) Lignes de tableau "mode code" ——— */
+/* Marque la table ET/OU les tr concernés :
+   <table class="code-table"> ... 
+   <tr class="code-row"> ... 
+*/
+.sio table.code-table {
+  border-collapse: separate;  /* nécessaire pour border-radius par cellule */
+  border-spacing: 0;
+}
+
+.sio table.code-table tr.code-row > th,
+.sio table.code-table tr.code-row > td,
+.sio tr.code-row > th,
+.sio tr.code-row > td {
+  background: #0f172a !important;
+  color: #e5e7eb !important;
+  border: 1px solid rgba(255,255,255,0.12);
+  font: 0.95rem/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  padding: 0.5rem 0.75rem;
+}
+
+/* Coins arrondis sur la ligne complète (si la table n’a pas de bordures fusionnées) */
+.sio table.code-table tr.code-row > th:first-child,
+.sio table.code-table tr.code-row > td:first-child {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+.sio table.code-table tr.code-row > th:last-child,
+.sio table.code-table tr.code-row > td:last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+/* Option : légère ombre comme pour .sio .card pre */
+.sio table.code-table tr.code-row > th,
+.sio table.code-table tr.code-row > td {
+  box-shadow: 0 1px 2px rgba(0,0,0,0.25);
+}
+
