@@ -173,3 +173,120 @@
 .cyber .info a:hover {
   text-decoration: underline;
 }
+/* Système d'explications dépliables avec <details> et <summary> */
+.cyber details {
+  margin: 15px 0;
+  background: #fff4e5;
+  border: 1px solid #ffe1b8;
+  border-radius: 10px;
+  padding: 12px;
+  transition: all 0.3s ease;
+}
+
+.cyber details[open] {
+  background: #fffaf0;
+  border-color: #ffb347;
+  box-shadow: 0 2px 8px rgba(255, 165, 0, 0.1);
+}
+
+.cyber summary {
+  cursor: pointer;
+  font-weight: bold;
+  color: #7a4100;
+  list-style: none;
+  user-select: none;
+  padding: 8px 0;
+  position: relative;
+  padding-left: 30px;
+}
+
+.cyber summary::-webkit-details-marker {
+  display: none;
+}
+
+.cyber summary:hover {
+  color: #5a3000;
+}
+
+/* Icône de flèche avant le texte */
+.cyber summary:before {
+  content: "▶";
+  position: absolute;
+  left: 5px;
+  top: 8px;
+  display: inline-block;
+  transition: transform 0.3s ease;
+  color: #ff8c00;
+  font-size: 14px;
+}
+
+.cyber details[open] summary:before {
+  transform: rotate(90deg);
+}
+
+/* Contenu déplié */
+.cyber details .details-content {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 2px solid #ffe1b8;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Style spécifique pour les explications dans les warning */
+.cyber .warning details {
+  background: #fff4e5;
+  border: 1px solid #ffe1b8;
+}
+
+.cyber .warning details[open] {
+  background: #fffaf0;
+}
+
+/* Style spécifique pour les explications dans les info */
+.cyber .info details {
+  background: #eef2ff;
+  border: 1px solid #d9e0ff;
+}
+
+.cyber .info details[open] {
+  background: #f5f7ff;
+  border-color: #b3c7ff;
+}
+
+.cyber .info summary {
+  color: #1a2a6b;
+}
+
+.cyber .info summary:before {
+  color: #4169e1;
+}
+
+/* Style spécifique pour les explications dans les danger */
+.cyber .danger details {
+  background: #ffe8e8;
+  border: 1px solid #ffc9c9;
+}
+
+.cyber .danger details[open] {
+  background: #fff5f5;
+  border-color: #ff9999;
+}
+
+.cyber .danger summary {
+  color: #7a0d0d;
+}
+
+.cyber .danger summary:before {
+  color: #dc143c;
+}
