@@ -1,0 +1,99 @@
+/* ==========================================================================
+   Thème Cyber – BTS SIO Bloc 3 (Cybersécurité)
+   Utilisation : appliquer class="cyber" sur un <div> ou un conteneur
+   ========================================================================== */
+
+.cyber {
+  --cy-primary: #7e57c2;
+  --cy-primary-dark: #5e2070;
+  --cy-accent: #9c7dd9;
+  --cy-bg: #f3f3f6;
+  --cy-panel: #faf8ff;
+  --cy-border: #e6e2f3;
+  --cy-text: #222;
+  --cy-muted: #555;
+}
+
+/* Conteneur principal */
+.cyber {
+  display:block;
+  background: #7e57c2;
+  color: var(--cy-text);
+  padding: 18px 20px;
+  border-radius: 14px;
+  border: 1px solid var(--cy-border);
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+  margin:0 0 22px 0;
+  box-shadow:0 8px 24px rgba(0,0,0,.08);
+}
+
+/* Titres */
+.cyber h1, .cyber h2, .cyber h3 {
+  color: var(--cy-primary-dark);
+  font-weight: 700;
+  margin-top: 1em;
+}
+
+/* Variantes */
+.cyber .banner--violet{ background:#7e57c2 !important; }
+.cyber .banner--green{  background:#2e7d32 !important; }
+/* Encadrés info / attention */
+.cyber .info {
+  background: #eef2ff;
+  border: 1px solid #d9e0ff;
+  color: #1a2a6b;
+  padding: 12px;
+  border-radius: 10px;
+  margin: 15px 0;
+}
+.cyber .warning {
+  background: #fff4e5;
+  border: 1px solid #ffe1b8;
+  color: #7a4100;
+  padding: 12px;
+  border-radius: 10px;
+  margin: 15px 0;
+}
+.cyber .danger {
+  background: #ffe8e8;
+  border: 1px solid #ffc9c9;
+  color: #7a0d0d;
+  padding: 12px;
+  border-radius: 10px;
+  margin: 15px 0;
+}
+
+/* Tableaux */
+.cyber table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  background: #fff;
+  border: 1px solid var(--cy-border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.cyber table th {
+  background: #efe7fb;
+  color: var(--cy-primary-dark);
+  padding: 8px;
+  border-bottom: 2px solid var(--cy-border);
+}
+.cyber table td {
+  padding: 8px;
+  border: 1px solid var(--cy-border);
+}
+
+/* Boutons stylisés */
+.cyber .btn {
+  display: inline-block;
+  background: var(--cy-primary);
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+.cyber .btn:hover {
+  background: var(--cy-primary-dark);
+}
