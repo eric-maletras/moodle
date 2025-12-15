@@ -287,6 +287,47 @@
   color: #7a0d0d;
 }
 
+/* Surtitre au-dessus du h1 */
+.surtitre {
+  text-transform: uppercase;
+  font-size: 0.85em;
+  letter-spacing: 2px;
+  color: #00bcd4;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+}
+
+/* Bandeau trio : conteneur flex pour 3 colonnes */
+.bandeau-trio {
+  display: flex;
+  gap: 1em;
+  margin-top: 1.5em;
+  flex-wrap: wrap;
+}
+
+/* Chaque item du bandeau */
+.bandeau-item {
+  flex: 1;
+  min-width: 200px;
+  background: rgba(0, 188, 212, 0.15);
+  border-left: 4px solid #00bcd4;
+  padding: 1em;
+  border-radius: 0 8px 8px 0;
+}
+
+.bandeau-item strong {
+  display: block;
+  margin-bottom: 0.5em;
+  color: #00bcd4;
+  font-size: 1.1em;
+}
+
+.bandeau-item p {
+  margin: 0;
+  font-size: 0.95em;
+  line-height: 1.4;
+}
+
 .cyber .danger summary:before {
   color: #dc143c;
 }
