@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Banque de questions — DFS (Système de fichiers distribué)
+  Source : livre Moodle cmid 663 (cours 60 « ISCE 25-27 Bloc 1-2 »).
+  15 questions : 6 QCM, 3 vrai/faux, 3 réponse courte, 1 appariement, 2 cloze.
+  Import : Banque de questions > Importer > format « Format XML Moodle ».
+-->
+<quiz>
+
+  <question type="category">
+    <category>
+      <text>$course$/top/DFS - Système de fichiers distribué</text>
+    </category>
+    <info format="html">
+      <text>Questions sur le système de fichiers distribué (DFS-N et DFS-R), issues du livre du cours.</text>
+    </info>
+  </question>
+
+  <!-- ============================ QCM ============================ -->
+
+  <question type="multichoice">
+    <name><text>DFS-01-QCM - Définition de DFS</text></name>
+    <questiontext format="html"><text><![CDATA[<p>Que désigne le sigle <strong>DFS</strong> et quel est son rôle principal ?</p>]]></text></questiontext>
+    <generalfeedback format="html"><text><![CDATA[<p>DFS (Distributed File System) regroupe logiquement plusieurs partages réseau dispersés en une arborescence unique accessible via un espace de noms unifié (ex. <code>\\labo.lan\Partages</code>).</p>]]></text></generalfeedback>
+    <defaultgrade>1.0</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <correctfeedback format="html"><text>Bonne réponse.</text></correctfeedback>
+    <partiallycorrectfeedback format="html"><text>Réponse partiellement correcte.</text></partiallycorrectfeedback>
+    <incorrectfeedback format="html"><text>Réponse incorrecte.</text></incorrectfeedback>
+    <answer fraction="100" format="html"><text><![CDATA[Distributed File System : il regroupe logiquement plusieurs partages réseau en une arborescence unique.]]></text><feedback format="html"><text>Exact.</text></feedback></answer>
+    <answer fraction="0" format="html"><text><![CDATA[Disk File System : un système de fichiers pour formater les disques durs.]]></text><feedback format="html"><text>Non, DFS n'est pas un système de fichiers de disque (comme NTFS).</text></feedback></answer>
+    <answer fraction="0" format="html"><text><![CDATA[Dynamic Folder Sharing : un protocole de partage temporaire de dossiers.]]></text><feedback format="html"><text>Sigle inexistant.</text></feedback></answer>
+    <answer fraction="0" format="html"><text><![CDATA[Domain File Server : un type de contrôleur de domaine dédié aux fichiers.]]></text><feedback format="html"><text>Non.</text></feedback></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>DFS-02-QCM - Rôle de DFS-N</text></name>
+    <questiontext format="html"><text><![CDATA[<p>Parmi les deux composants de DFS, lequel <strong>organise les chemins logiques sans déplacer aucune donnée</strong> ?</p>]]></text></questiontext>
+    <generalfeedback format="html"><text><![CDATA[<p>DFS-N (Namespaces) gère le <em>nommage</em> : il expose une arborescence logique. DFS-R (Replication) gère la copie réelle des fichiers entre serveurs.</p>]]></text></generalfeedback>
+    <defaultgrade>1.0</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <correctfeedback format="html"><text>Bonne réponse.</text></correctfeedback>
+    <partiallycorrectfeedback format="html"><text>Réponse partiellement correcte.</text></partiallycorrectfeedback>
+    <incorrectfeedback format="html"><text>Réponse incorrecte.</text></incorrectfeedback>
+    <answer fraction="100" format="html"><text><![CDATA[DFS-N (DFS Namespaces)]]></text><feedback format="html"><text>Exact : DFS-N ne fait que pointer, il ne copie rien.</text></feedback></answer>
+    <answer fraction="0" format="html"><text><![CDATA[DFS-R (DFS Replication)]]></text><feedback format="html"><text>Non, DFS-R copie réellement les données.</text></feedback></answer>
+    <answer fraction="0" format="html"><text><![CDATA[RDC (Remote Differential Compression)]]></text><feedback format="html"><text>RDC est un algorithme d'optimisation de DFS-R, pas un composant de nommage.</text></feedback></answer>
+    <answer fraction="0" format="html"><text><![CDATA[ABE (Access-Based Enumeration)]]></text><feedback format="html"><text>ABE concerne l'affichage des dossiers selon les droits.</text></feedback></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>DFS-05-QCM - Type d'espace de noms recommandé</text></name>
+    <questiontext format="html"><text><![CDATA[<p>En production (et dans le cadre du BTS SIO), quel type d'espace de noms faut-il privilégier ?</p>]]></text></questiontext>
+    <generalfeedback format="html"><text><![CDATA[<p>L'espace de noms <strong>de domaine</strong> est intégré à Active Directory : ses métadonnées sont répliquées sur tous les contrôleurs de domaine, ce qui lui confère une haute disponibilité automatique. L'autonome est réservé aux cas particuliers (test, serveur hors domaine).</p>]]></text></generalfeedback>
+    <defaultgrade>1.0</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <correctfeedback format="html"><text>Bonne réponse.</text></correctfeedback>
+    <partiallycorrectfeedback format="html"><text>Réponse partiellement correcte.</text></partiallycorrectfeedback>
+    <incorrectfeedback format="html"><text>Réponse incorrecte.</text></incorrectfeedback>
+    <answer fraction="100" format="html"><text><![CDATA[Un espace de noms de domaine (intégré à Active Directory)]]></text><feedback format="html"><text>Exact, pour la haute disponibilité via AD.</text></feedback></answer>
+    <answer fraction="0" format="html"><text><![CDATA[Un espace de noms autonome (hébergé sur un seul serveur)]]></text><feedback format="html"><text>Réservé aux maquettes/serveurs hors domaine : aucune redondance native.</text></feedback></answer>
+    <answer fraction="0" format="html"><text><![CDATA[Peu importe, les deux offrent la même disponibilité.]]></text><feedback format="html"><text>Faux : seul celui de domaine est redondé via AD.</text></feedback></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>DFS-08-QCM - Permissions effectives</text></name>
+    <questiontext format="html"><text><![CDATA[<p>Un utilisateur accède à un dossier via DFS. Les permissions de <strong>partage SMB</strong> et les permissions <strong>NTFS</strong> diffèrent. Quel droit obtient-il finalement ?</p>]]></text></questiontext>
+    <generalfeedback format="html"><text><![CDATA[<p>Windows applique l'<strong>intersection</strong> des deux niveaux : c'est toujours le <em>plus restrictif</em> qui l'emporte. Bonne pratique : partage en Contrôle total pour Tout le monde, puis gestion fine via NTFS.</p>]]></text></generalfeedback>
+    <defaultgrade>1.0</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <correctfeedback format="html"><text>Bonne réponse.</text></correctfeedback>
+    <partiallycorrectfeedback format="html"><text>Réponse partiellement correcte.</text></partiallycorrectfeedback>
+    <incorrectfeedback format="html"><text>Réponse incorrecte.</text></incorrectfeedback>
+    <answer fraction="100" format="html"><text><![CDATA[Le droit le plus restrictif des deux (l'intersection)]]></text><feedback format="html"><text>Exact.</text></feedback></answer>
+    <answer fraction="0" format="html"><text><![CDATA[Le droit le plus permissif des deux (l'union)]]></text><feedback format="html"><text>Non, c'est l'inverse : le plus restrictif gagne.</text></feedback></answer>
+    <answer fraction="0" format="html"><text><![CDATA[Uniquement le droit NTFS, le partage est ignoré]]></text><feedback format="html"><text>Non, les deux niveaux sont évalués.</text></feedback></answer>
+    <answer fraction="0" format="html"><text><![CDATA[Uniquement le droit de partage SMB]]></text><feedback format="html"><text>Non, les deux niveaux sont évalués.</text></feedback></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>DFS-11-QCM - Topologie de réplication</text></name>
+    <questiontext format="html"><text><![CDATA[<p>Pour un groupe de réplication comptant jusqu'à une dizaine de serveurs, quelle topologie DFS-R est recommandée ?</p>]]></text></questiontext>
+    <generalfeedback format="html"><text><![CDATA[<p>La topologie <strong>maillée complète (Full Mesh)</strong> est conseillée jusqu'à ~10 serveurs : tous répliquent entre eux. Au-delà, on préfère la topologie <strong>en étoile (Hub and Spoke)</strong> pour économiser la bande passante.</p>]]></text></generalfeedback>
+    <defaultgrade>1.0</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <correctfeedback format="html"><text>Bonne réponse.</text></correctfeedback>
+    <partiallycorrectfeedback format="html"><text>Réponse partiellement correcte.</text></partiallycorrectfeedback>
+    <incorrectfeedback format="html"><text>Réponse incorrecte.</text></incorrectfeedback>
+    <answer fraction="100" format="html"><text><![CDATA[Maillée complète (Full Mesh)]]></text><feedback format="html"><text>Exact, jusqu'à ~10 serveurs.</text></feedback></answer>
+    <answer fraction="0" format="html"><text><![CDATA[En étoile (Hub and Spoke)]]></text><feedback format="html"><text>Plutôt recommandée au-delà de 10 serveurs ou sur liens WAN limités.</text></feedback></answer>
+    <answer fraction="0" format="html"><text><![CDATA[En anneau (Ring)]]></text><feedback format="html"><text>Topologie non préconisée ici.</text></feedback></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>DFS-14-QCM - Rôle de l'ABE</text></name>
+    <questiontext format="html"><text><![CDATA[<p>Que fait l'<strong>énumération basée sur l'accès (ABE)</strong> ?</p>]]></text></questiontext>
+    <generalfeedback format="html"><text><![CDATA[<p>L'ABE <strong>masque</strong> à chaque utilisateur les dossiers sur lesquels il n'a aucun droit (au lieu de les afficher grisés). Elle <em>n'ouvre ni ne ferme aucun accès</em> : elle ne fait que cacher ou montrer. À activer à la fois sur l'espace de noms DFS-N et sur chaque partage SMB.</p>]]></text></generalfeedback>
+    <defaultgrade>1.0</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <correctfeedback format="html"><text>Bonne réponse.</text></correctfeedback>
+    <partiallycorrectfeedback format="html"><text>Réponse partiellement correcte.</text></partiallycorrectfeedback>
+    <incorrectfeedback format="html"><text>Réponse incorrecte.</text></incorrectfeedback>
+    <answer fraction="100" format="html"><text><![CDATA[Elle masque les dossiers auxquels l'utilisateur n'a pas accès.]]></text><feedback format="html"><text>Exact : elle agit sur l'affichage, pas sur les droits.</text></feedback></answer>
+    <answer fraction="0" format="html"><text><![CDATA[Elle accorde automatiquement l'accès en lecture à tous les dossiers.]]></text><feedback format="html"><text>Non, l'ABE ne modifie aucun droit.</text></feedback></answer>
+    <answer fraction="0" format="html"><text><![CDATA[Elle chiffre les dossiers sensibles.]]></text><feedback format="html"><text>Non, c'est le rôle de SMB Encryption.</text></feedback></answer>
+    <answer fraction="0" format="html"><text><![CDATA[Elle réplique les dossiers entre serveurs.]]></text><feedback format="html"><text>Non, c'est DFS-R.</text></feedback></answer>
+  </question>
+
+  <!-- ========================= VRAI / FAUX ========================= -->
+
+  <question type="truefalse">
+    <name><text>DFS-03-VF - DFS-N et déplacement de données</text></name>
+    <questiontext format="html"><text><![CDATA[<p>DFS-N copie physiquement les fichiers d'un serveur à un autre.</p>]]></text></questiontext>
+    <generalfeedback format="html"><text><![CDATA[<p>Faux. DFS-N ne gère que le <em>nommage</em> (des pointeurs logiques). C'est DFS-R qui copie réellement le contenu.</p>]]></text></generalfeedback>
+    <defaultgrade>1.0</defaultgrade>
+    <penalty>1.0</penalty>
+    <hidden>0</hidden>
+    <answer fraction="0"><text>true</text><feedback format="html"><text>Non : DFS-N ne déplace aucune donnée.</text></feedback></answer>
+    <answer fraction="100"><text>false</text><feedback format="html"><text>Exact : seul DFS-R copie les données.</text></feedback></answer>
+  </question>
+
+  <question type="truefalse">
+    <name><text>DFS-06-VF - Cibles multiples et réplication</text></name>
+    <questiontext format="html"><text><![CDATA[<p>Ajouter deux cibles à un même dossier DFS-N synchronise automatiquement leur contenu.</p>]]></text></questiontext>
+    <generalfeedback format="html"><text><![CDATA[<p>Faux. Deux cibles offrent un basculement (chemins alternatifs), mais ne répliquent rien. Pour que les fichiers soient identiques, il faut configurer un <strong>groupe de réplication DFS-R</strong> en complément.</p>]]></text></generalfeedback>
+    <defaultgrade>1.0</defaultgrade>
+    <penalty>1.0</penalty>
+    <hidden>0</hidden>
+    <answer fraction="0"><text>true</text><feedback format="html"><text>Non : redondance d'accès ≠ redondance de données.</text></feedback></answer>
+    <answer fraction="100"><text>false</text><feedback format="html"><text>Exact : il faut DFS-R en plus.</text></feedback></answer>
+  </question>
+
+  <question type="truefalse">
+    <name><text>DFS-09-VF - DFS-R comme sauvegarde</text></name>
+    <questiontext format="html"><text><![CDATA[<p>DFS-R peut remplacer une stratégie de sauvegarde.</p>]]></text></questiontext>
+    <generalfeedback format="html"><text><![CDATA[<p>Faux. DFS-R réplique aussi les suppressions : un effacement accidentel est propagé partout. Il faut donc conserver une sauvegarde indépendante (Windows Server Backup, Veeam…).</p>]]></text></generalfeedback>
+    <defaultgrade>1.0</defaultgrade>
+    <penalty>1.0</penalty>
+    <hidden>0</hidden>
+    <answer fraction="0"><text>true</text><feedback format="html"><text>Non : une suppression est répliquée partout.</text></feedback></answer>
+    <answer fraction="100"><text>false</text><feedback format="html"><text>Exact : DFS-R n'est pas une sauvegarde.</text></feedback></answer>
+  </question>
+
+  <!-- ======================= RÉPONSE COURTE ======================= -->
+
+  <question type="shortanswer">
+    <name><text>DFS-04-RC - Algorithme d'optimisation DFS-R</text></name>
+    <questiontext format="html"><text><![CDATA[<p>Quel algorithme permet à DFS-R de ne transmettre que les <strong>blocs modifiés</strong> d'un fichier au lieu du fichier entier ? (donnez le sigle ou son nom complet)</p>]]></text></questiontext>
+    <generalfeedback format="html"><text><![CDATA[<p>Le RDC (<em>Remote Differential Compression</em>) : une modification de 2 Mo dans un fichier de 100 Mo ne génère que 2 Mo de trafic.</p>]]></text></generalfeedback>
+    <defaultgrade>1.0</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <usecase>0</usecase>
+    <answer fraction="100" format="moodle_auto_format"><text>RDC</text><feedback format="html"><text>Exact.</text></feedback></answer>
+    <answer fraction="100" format="moodle_auto_format"><text>Remote Differential Compression</text><feedback format="html"><text>Exact.</text></feedback></answer>
+    <answer fraction="0" format="moodle_auto_format"><text>*</text><feedback format="html"><text>Réponse attendue : RDC (Remote Differential Compression).</text></feedback></answer>
+  </question>
+
+  <question type="shortanswer">
+    <name><text>DFS-10-RC - Dossier des fichiers en conflit</text></name>
+    <questiontext format="html"><text><![CDATA[<p>Comment s'appelle le dossier (caché) où DFS-R place les fichiers en conflit ou supprimés ?</p>]]></text></questiontext>
+    <generalfeedback format="html"><text><![CDATA[<p>Le dossier <code>DfsrPrivate\ConflictAndDeleted</code>, situé à la racine de chaque dossier répliqué. Son contenu est conservé 60 jours par défaut.</p>]]></text></generalfeedback>
+    <defaultgrade>1.0</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <usecase>0</usecase>
+    <answer fraction="100" format="moodle_auto_format"><text>ConflictAndDeleted</text><feedback format="html"><text>Exact.</text></feedback></answer>
+    <answer fraction="100" format="moodle_auto_format"><text>DfsrPrivate\ConflictAndDeleted</text><feedback format="html"><text>Exact.</text></feedback></answer>
+    <answer fraction="0" format="moodle_auto_format"><text>*</text><feedback format="html"><text>Réponse attendue : ConflictAndDeleted.</text></feedback></answer>
+  </question>
+
+  <question type="shortanswer">
+    <name><text>DFS-15-RC - Cmdlet de surveillance du backlog</text></name>
+    <questiontext format="html"><text><![CDATA[<p>Quelle cmdlet PowerShell permet de connaître le <strong>backlog</strong> (nombre de fichiers en attente de réplication) entre membres DFS-R ?</p>]]></text></questiontext>
+    <generalfeedback format="html"><text><![CDATA[<p><code>Get-DfsrBacklog</code>. Un backlog élevé révèle un goulet d'étranglement (bande passante, serveur surchargé, mauvaise configuration).</p>]]></text></generalfeedback>
+    <defaultgrade>1.0</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <usecase>0</usecase>
+    <answer fraction="100" format="moodle_auto_format"><text>Get-DfsrBacklog</text><feedback format="html"><text>Exact.</text></feedback></answer>
+    <answer fraction="0" format="moodle_auto_format"><text>*</text><feedback format="html"><text>Réponse attendue : Get-DfsrBacklog.</text></feedback></answer>
+  </question>
+
+  <!-- ========================= APPARIEMENT ========================= -->
+
+  <question type="matching">
+    <name><text>DFS-07-APP - Vocabulaire DFS</text></name>
+    <questiontext format="html"><text><![CDATA[<p>Associez chaque terme du vocabulaire DFS à sa définition.</p>]]></text></questiontext>
+    <generalfeedback format="html"><text><![CDATA[<p>Espace de noms → racine logique ; Dossier → pointeur logique ; Cible de dossier → chemin UNC réel ; Groupe de réplication → ensemble de serveurs qui répliquent ; Dossier répliqué → contenu synchronisé.</p>]]></text></generalfeedback>
+    <defaultgrade>1.0</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <shuffleanswers>true</shuffleanswers>
+    <correctfeedback format="html"><text>Bonne réponse.</text></correctfeedback>
+    <partiallycorrectfeedback format="html"><text>Réponse partiellement correcte.</text></partiallycorrectfeedback>
+    <incorrectfeedback format="html"><text>Réponse incorrecte.</text></incorrectfeedback>
+    <subquestion format="html"><text><![CDATA[Espace de noms]]></text><answer><text><![CDATA[La racine logique unique visible par les utilisateurs (point d'entrée de l'arborescence).]]></text></answer></subquestion>
+    <subquestion format="html"><text><![CDATA[Dossier]]></text><answer><text><![CDATA[Un élément logique de l'espace de noms qui ne contient pas de données : c'est un pointeur.]]></text></answer></subquestion>
+    <subquestion format="html"><text><![CDATA[Cible de dossier]]></text><answer><text><![CDATA[Le chemin UNC réel où les fichiers sont physiquement stockés.]]></text></answer></subquestion>
+    <subquestion format="html"><text><![CDATA[Groupe de réplication]]></text><answer><text><![CDATA[L'ensemble des serveurs qui répliquent les mêmes données entre eux via DFS-R.]]></text></answer></subquestion>
+    <subquestion format="html"><text><![CDATA[Dossier répliqué]]></text><answer><text><![CDATA[Le contenu réellement synchronisé entre les membres d'un groupe de réplication.]]></text></answer></subquestion>
+  </question>
+
+  <!-- ============================ CLOZE ============================ -->
+
+  <question type="cloze">
+    <name><text>DFS-12-CLOZE - Paramètres techniques DFS-R</text></name>
+    <questiontext format="html"><text><![CDATA[<p>Complétez les paramètres de dimensionnement et de dépannage de DFS-R :</p>
+<p>1. Microsoft recommande de dimensionner le dossier de <em>staging</em> à au minimum {1:MULTICHOICE:=16 fois~2 fois~4 fois~10 fois} la taille du plus gros fichier répliqué.</p>
+<p>2. DFS-R utilise le port RPC {1:SHORTANSWER:=5722} pour la réplication (en plus de la plage RPC dynamique).</p>
+<p>3. Les fichiers du dossier ConflictAndDeleted sont conservés par défaut pendant {1:NUMERICAL:=60} jours.</p>]]></text></questiontext>
+    <generalfeedback format="html"><text><![CDATA[<p>Staging ≥ 16× le plus gros fichier ; port DFS-R 5722 ; conservation 60 jours.</p>]]></text></generalfeedback>
+    <defaultgrade>3.0</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+  </question>
+
+  <question type="cloze">
+    <name><text>DFS-13-CLOZE - Concepts DFS-N / DFS-R</text></name>
+    <questiontext format="html"><text><![CDATA[<p>Complétez la synthèse :</p>
+<p>Le composant qui organise les chemins logiques sans déplacer de données est {1:SHORTANSWER:=DFS-N~%50%DFS Namespaces}, tandis que celui qui synchronise réellement le contenu entre serveurs est {1:SHORTANSWER:=DFS-R~%50%DFS Replication}.</p>
+<p>Lorsqu'un utilisateur accède à un dossier, Windows applique {1:MULTICHOICE:=l'intersection (le plus restrictif)~l'union (le plus permissif)} des permissions de partage SMB et NTFS.</p>
+<p>La fonctionnalité qui masque les dossiers auxquels l'utilisateur n'a pas accès est l'{1:SHORTANSWER:=ABE~%50%énumération basée sur l'accès}.</p>]]></text></questiontext>
+    <generalfeedback format="html"><text><![CDATA[<p>DFS-N = nommage ; DFS-R = réplication ; permissions = intersection (plus restrictif) ; ABE = masquage des dossiers interdits.</p>]]></text></generalfeedback>
+    <defaultgrade>4.0</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+  </question>
+
+</quiz>
