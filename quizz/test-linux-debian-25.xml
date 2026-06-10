@@ -280,7 +280,7 @@
       <text>Debian est une distribution commerciale.</text>
     </name>
     <questiontext format="html">
-      <text><![CDATA[<![CDATA[Debian est une distribution commerciale.]]]]><![CDATA[>]]></text>
+      <text><![CDATA[Debian est une distribution commerciale.]]></text>
     </questiontext>
     <generalfeedback format="html">
       <text></text>

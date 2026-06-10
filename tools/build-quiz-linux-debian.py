@@ -62,7 +62,7 @@ def extract_bank(path, targets):
             if i in used:
                 continue
             if n.startswith(t):
-                block = b.strip()
+                block = repair_cdata(b.strip())
                 if t in BANK_VARIANTS:
                     block = add_sa_variants(block, BANK_VARIANTS[t])
                 chosen.append(block)
@@ -71,6 +71,13 @@ def extract_bank(path, targets):
         else:
             print(f"!! cible banc introuvable: {t}", file=sys.stderr)
     return chosen
+
+
+def repair_cdata(block):
+    # Le banc exporté contient des CDATA imbriqués (énoncés cassés / « vides ») :
+    #   <text><![CDATA[<![CDATA[CONTENU]]]]><![CDATA[>]]></text>
+    # On rétablit un CDATA simple : <text><![CDATA[CONTENU]]></text>.
+    return block.replace("<![CDATA[<![CDATA[", "<![CDATA[").replace("]]]]><![CDATA[>]]>", "]]>")
 
 
 def add_sa_variants(block, variants):
