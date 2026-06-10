@@ -34,6 +34,7 @@ scp -P 8822 tools/moodle-query.php admin1@212.129.63.245:~/moodle-query.php
 | `q.sh` | Envoie une requête SQL au serveur et renvoie le JSON. `tools/q.sh "SELECT 1"` |
 | `read-book.sh <cmid>` | Dump le contenu d'un livre (entrée pour rédiger un quiz). |
 | `read-qbank.sh <courseid> [--questions]` | Inventaire de la banque de questions d'un cours. |
+| `build-book-mbz.py` | Génère un `.mbz` (backup activité « Livre », Moodle 4.1) à partir d'un JSON de chapitres `[{id,title,contents}]`. Aucune écriture Moodle. |
 
 ## Workflow type : un livre → un quiz
 
