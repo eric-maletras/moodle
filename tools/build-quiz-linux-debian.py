@@ -27,8 +27,20 @@ BANK_TARGETS = [
     "linux apt update",
     "apt upgrade",
     "copier dossier recursivement",
-    "assoc. commandes fonctions",
 ]
+
+# Variantes de réponse à ajouter à certaines questions « commande » du banc
+# (réponse courte = correspondance exacte → on rend l'évaluation plus tolérante).
+BANK_VARIANTS = {
+    "copier dossier recursivement": [
+        "cp -R Documents Sauvegarde",
+        "cp -r Documents/ Sauvegarde",
+        "cp -r Documents Sauvegarde/",
+        "cp -r Documents/ Sauvegarde/",
+        "cp -r* Documents* Sauvegarde*",
+        "cp -R* Documents* Sauvegarde*",
+    ],
+}
 
 
 def norm(s):
@@ -50,12 +62,25 @@ def extract_bank(path, targets):
             if i in used:
                 continue
             if n.startswith(t):
-                chosen.append(b.strip())
+                block = b.strip()
+                if t in BANK_VARIANTS:
+                    block = add_sa_variants(block, BANK_VARIANTS[t])
+                chosen.append(block)
                 used.add(i)
                 break
         else:
             print(f"!! cible banc introuvable: {t}", file=sys.stderr)
     return chosen
+
+
+def add_sa_variants(block, variants):
+    # Insère des <answer fraction="100"> supplémentaires avant </question>.
+    ins = "\n".join(
+        f'    <answer fraction="100" format="moodle_auto_format"><text>{v}</text>'
+        f'<feedback format="moodle_auto_format"><text></text></feedback></answer>'
+        for v in variants
+    )
+    return block.replace("</question>", ins + "\n  </question>")
 
 
 # ---------- Helpers de génération (questions de la leçon) ----------
@@ -93,11 +118,13 @@ def numeric(name, qtext, value, tol=0):
   </question>''')
 
 
-def vf(name, qtext, correct_true):
+def vf(name, qtext, correct_true, generalfeedback=""):
     tf = ("true", "false") if correct_true else ("false", "true")
+    gf = (f'\n    <generalfeedback format="html"><text><![CDATA[{generalfeedback}]]></text>'
+          f'</generalfeedback>' if generalfeedback else "")
     return _wrap(f'''<question type="truefalse">
     <name><text>{name}</text></name>
-    <questiontext format="html"><text><![CDATA[{qtext}]]></text></questiontext>
+    <questiontext format="html"><text><![CDATA[{qtext}]]></text></questiontext>{gf}
     <defaultgrade>1.0000000</defaultgrade>
     <penalty>1.0000000</penalty>
     <hidden>0</hidden>
@@ -179,25 +206,35 @@ def lesson_questions():
     q.append(sa("LIN-08-RC chmod (droit d'exécution au groupe)",
                 "<p>On veut donner au groupe propriétaire le droit d'exécution sur le fichier "
                 "<code>text.php</code>. Quelle est la commande ?</p>",
-                ["chmod g+x text.php"]))
+                ["chmod g+x text.php", "chmod g+x ./text.php", "chmod*g+x*text.php"]))
     q.append(sa("LIN-09-RC chown récursif",
                 "<p>On veut changer le propriétaire et le groupe propriétaire du dossier <code>glpi</code> "
                 "et de tout son contenu (récursif), vers <code>www-data:www-data</code>. Quelle est la commande ?</p>",
-                ["chown -R www-data:www-data glpi", "chown www-data:www-data -R glpi"]))
+                ["chown -R www-data:www-data glpi", "chown www-data:www-data -R glpi",
+                 "chown -R www-data:www-data ./glpi", "chown*-R*www-data:www-data*glpi",
+                 "chown*www-data:www-data*-R*glpi"]))
     q.append(sa("LIN-10-RC Lister avec permissions",
                 "<p>On veut lister les fichiers/répertoires du dossier courant <strong>en affichant les "
                 "permissions</strong>. Quelle est la commande ?</p>",
-                ["ls -l", "ls -al", "ls -la"]))
+                ["ls -l", "ls -al", "ls -la", "ls -lh", "ll", "ls -l *"]))
     q.append(sa("LIN-11-RC Lister un dossier précis",
                 "<p>Le dossier courant est <code>/home/admin1</code>. On veut lister (avec les permissions) "
                 "le dossier <code>/var/www</code>. Quelle est la commande ?</p>",
-                ["ls -l /var/www"]))
+                ["ls -l /var/www", "ls -al /var/www", "ls -la /var/www", "ls -l /var/www/",
+                 "ls -l* /var/www*", "ls -al* /var/www*"]))
     q.append(matching("LIN-12-APP Commandes usuelles",
                       "<p>Associez chaque commande à son action (dossier courant).</p>",
                       [("Créer un dossier <code>temp</code> dans le dossier courant", "mkdir temp"),
                        ("Copier <code>fic2.txt</code> vers le sous-dossier <code>dossier1</code>", "cp fic2.txt dossier1/"),
                        ("Copier <code>fic2.txt</code> vers <code>/var/www/dossier1</code>", "cp fic2.txt /var/www/dossier1/"),
                        ("Déplacer <code>fic2.txt</code> vers le sous-dossier <code>dossier1</code>", "mv fic2.txt dossier1/fic2.txt")]))
+    q.append(vf("LIN-13-VF Distribution = GNU + Linux ?",
+                "<p>Une distribution Linux est-elle <strong>forcément</strong> composée d'une partie GNU "
+                "<strong>et</strong> d'une partie Linux ?</p>",
+                correct_true=False,
+                generalfeedback="<p>Non : les parties GNU et Linux sont indépendantes. Il existe des systèmes "
+                "avec Linux sans GNU (ex. <strong>Android</strong>) et des systèmes GNU sans Linux "
+                "(ex. GNU/Hurd).</p>"))
     return q
 
 
