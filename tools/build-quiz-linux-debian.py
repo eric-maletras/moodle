@@ -245,38 +245,54 @@ def lesson_questions():
     return q
 
 
+OUT_IMPORT = "quizz/test-linux-debian-lecon.xml"
+OUT_COMPO = "quizz/test-linux-debian-composition.md"
+
+
 def main():
     lesson = lesson_questions()
+    lesson_names = [re.search(r"<name><text>(.*?)</text>", q).group(1) for q in lesson]
     bank = extract_bank(BANK, BANK_TARGETS)
-    total = len(lesson) + len(bank)
+    bank_names = [re.search(r"<name>\s*<text>(.*?)</text>", b, re.S).group(1).strip() for b in bank]
 
+    # 1) Fichier d'IMPORT : uniquement les questions de la leçon (absentes de la banque).
     header = f'''<?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Test « Linux-Debian Généralités » — {total} questions.
-  Source : {len(lesson)} questions reprises de la leçon initiale (cmid 20),
-           {len(bank)} questions sélectionnées dans le banc II.1 Linux (on-topic).
+  Questions de la leçon « Linux-Debian Généralités » (cmid 20) à IMPORTER.
+  Ces {len(lesson)} questions n'étaient PAS dans la banque (elles étaient dans la
+  leçon). Les 12 autres du test sont déjà dans ta banque (cf. .md de composition).
   Import : Banque de questions > Importer > « Format XML Moodle »
            (cocher « Récupérer la catégorie depuis le fichier »).
 -->
 <quiz>
 
   <question type="category">
-    <category><text>$course$/top/Test - Linux-Debian Généralités</text></category>
-    <info format="html"><text>Test de {total} questions sur le cours Linux-Debian (généralités, distributions, droits, système de fichiers, commandes, apt).</text></info>
+    <category><text>$course$/top/Test - Linux-Debian (questions de la leçon)</text></category>
+    <info format="html"><text>Questions issues de la leçon Linux-Debian, à combiner avec des questions déjà en banque pour le test de 25.</text></info>
   </question>
 
 '''
     parts = [header]
-    parts.append("  <!-- ===== Questions issues de la leçon initiale ===== -->\n\n")
     for q in lesson:
         parts.append("  " + q + "\n")
-    parts.append("  <!-- ===== Questions reprises du banc II.1 Linux ===== -->\n\n")
-    for b in bank:
-        parts.append("  " + b + "\n\n")
     parts.append("</quiz>\n")
+    open(OUT_IMPORT, "w", encoding="utf-8").write("".join(parts))
 
-    open(OUT, "w", encoding="utf-8").write("".join(parts))
-    print(f"OK : {OUT} — {total} questions ({len(lesson)} leçon + {len(bank)} banc)")
+    # 2) Note de COMPOSITION du test (13 importées + 12 à sélectionner dans la banque).
+    md = [f"# Test « Linux-Debian Généralités » — 25 questions\n",
+          "\n## A. À importer (catégorie « Test - Linux-Debian (questions de la leçon) »)\n",
+          f"Fichier : `{OUT_IMPORT}` — {len(lesson)} questions issues de la leçon (absentes de la banque).\n\n"]
+    for i, n in enumerate(lesson_names, 1):
+        md.append(f"{i}. {n}\n")
+    md.append("\n## B. À sélectionner dans ta banque existante (déjà présentes)\n")
+    md.append(f"{len(bank)} questions à ajouter au quiz depuis la banque (ne pas réimporter) :\n\n")
+    for i, n in enumerate(bank_names, 1):
+        md.append(f"{i}. {n}\n")
+    md.append("\n## Durée conseillée : 25 min (≈ 1 min/question).\n")
+    open(OUT_COMPO, "w", encoding="utf-8").write("".join(md))
+
+    print(f"OK : {OUT_IMPORT} ({len(lesson)} questions de la leçon)")
+    print(f"OK : {OUT_COMPO} (composition : {len(lesson)} import + {len(bank)} banque)")
 
 
 if __name__ == "__main__":

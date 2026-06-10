@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Questions de la leçon « Linux-Debian Généralités » (cmid 20) à IMPORTER.
+  Ces 13 questions n'étaient PAS dans la banque (elles étaient dans la
+  leçon). Les 12 autres du test sont déjà dans ta banque (cf. .md de composition).
+  Import : Banque de questions > Importer > « Format XML Moodle »
+           (cocher « Récupérer la catégorie depuis le fichier »).
+-->
+<quiz>
+
+  <question type="category">
+    <category><text>$course$/top/Test - Linux-Debian (questions de la leçon)</text></category>
+    <info format="html"><text>Questions issues de la leçon Linux-Debian, à combiner avec des questions déjà en banque pour le test de 25.</text></info>
+  </question>
+
+  <question type="shortanswer">
+    <name><text>LIN-01-RC Origine des OS</text></name>
+    <questiontext format="html"><text><![CDATA[<p>Quel système d'exploitation est à l'origine de la quasi-totalité des OS ?</p>]]></text></questiontext>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <usecase>0</usecase>
+    <answer fraction="100" format="moodle_auto_format"><text>UNIX</text><feedback format="html"><text></text></feedback></answer>
+    <answer fraction="100" format="moodle_auto_format"><text>Unix</text><feedback format="html"><text></text></feedback></answer>
+    <answer fraction="100" format="moodle_auto_format"><text>unix</text><feedback format="html"><text></text></feedback></answer>
+  </question>
+
+  <question type="numerical">
+    <name><text>LIN-02-NUM Date du projet GNU</text></name>
+    <questiontext format="html"><text><![CDATA[<p>En quelle année le projet GNU a-t-il été créé par Richard Stallman ?</p>]]></text></questiontext>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <answer fraction="100" format="moodle_auto_format"><text>1984</text>
+      <feedback format="html"><text></text></feedback><tolerance>0</tolerance></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>LIN-03-QCM Rôles préinstallés</text></name>
+    <questiontext format="html"><text><![CDATA[<p>Dans une distribution Linux, quels rôles serveurs sont préinstallés par défaut ?</p>]]></text></questiontext>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <correctfeedback format="html"><text>Bonne réponse.</text></correctfeedback>
+    <partiallycorrectfeedback format="html"><text>Partiellement correct.</text></partiallycorrectfeedback>
+    <incorrectfeedback format="html"><text>Réponse incorrecte.</text></incorrectfeedback>
+    <answer fraction="100" format="html"><text><![CDATA[Aucun : il faut installer chaque service au besoin.]]></text><feedback format="html"><text></text></feedback></answer>
+    <answer fraction="0" format="html"><text><![CDATA[DHCP - DNS]]></text><feedback format="html"><text></text></feedback></answer>
+    <answer fraction="0" format="html"><text><![CDATA[DHCP - FTP - DNS]]></text><feedback format="html"><text></text></feedback></answer>
+    <answer fraction="0" format="html"><text><![CDATA[FTP - IIS]]></text><feedback format="html"><text></text></feedback></answer>
+  </question>
+
+  <question type="truefalse">
+    <name><text>LIN-04-VF Noyau Linux totalement libre</text></name>
+    <questiontext format="html"><text><![CDATA[<p>Le noyau Linux est-il <strong>totalement</strong> libre ?</p>]]></text></questiontext>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>1.0000000</penalty>
+    <hidden>0</hidden>
+    <answer fraction="100" format="moodle_auto_format"><text>false</text><feedback format="html"><text>Correct.</text></feedback></answer>
+    <answer fraction="0" format="moodle_auto_format"><text>true</text><feedback format="html"><text>Incorrect.</text></feedback></answer>
+  </question>
+
+  <question type="multichoice">
+    <name><text>LIN-05-QCM Distributions grand public</text></name>
+    <questiontext format="html"><text><![CDATA[<p>Parmi ces distributions, lesquelles sont orientées <strong>grand public</strong> ?</p>]]></text></questiontext>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <single>false</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+    <correctfeedback format="html"><text>Bonne réponse.</text></correctfeedback>
+    <partiallycorrectfeedback format="html"><text>Partiellement correct.</text></partiallycorrectfeedback>
+    <incorrectfeedback format="html"><text>Réponse incorrecte.</text></incorrectfeedback>
+    <answer fraction="50" format="html"><text><![CDATA[Ubuntu]]></text><feedback format="html"><text></text></feedback></answer>
+    <answer fraction="50" format="html"><text><![CDATA[Fedora]]></text><feedback format="html"><text></text></feedback></answer>
+    <answer fraction="-50" format="html"><text><![CDATA[Debian]]></text><feedback format="html"><text></text></feedback></answer>
+    <answer fraction="-50" format="html"><text><![CDATA[Red Hat Enterprise Linux]]></text><feedback format="html"><text></text></feedback></answer>
+    <answer fraction="-50" format="html"><text><![CDATA[Slackware]]></text><feedback format="html"><text></text></feedback></answer>
+  </question>
+
+  <question type="matching">
+    <name><text>LIN-06-APP Arborescence Debian</text></name>
+    <questiontext format="html"><text><![CDATA[<p>Associez chaque dossier à son contenu.</p>]]></text></questiontext>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <shuffleanswers>true</shuffleanswers>
+    <correctfeedback format="html"><text>Bonne réponse.</text></correctfeedback>
+    <partiallycorrectfeedback format="html"><text>Partiellement correct.</text></partiallycorrectfeedback>
+    <incorrectfeedback format="html"><text>Réponse incorrecte.</text></incorrectfeedback>
+    <subquestion format="html"><text><![CDATA[Les fichiers exécutables et les commandes]]></text><answer><text>bin</text></answer></subquestion>
+    <subquestion format="html"><text><![CDATA[Les fichiers de configuration]]></text><answer><text>etc</text></answer></subquestion>
+    <subquestion format="html"><text><![CDATA[Les données variables]]></text><answer><text>var</text></answer></subquestion>
+  </question>
+
+  <question type="matching">
+    <name><text>LIN-07-APP Commandes de droits</text></name>
+    <questiontext format="html"><text><![CDATA[<p>Associez chaque commande à son action.</p>]]></text></questiontext>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <shuffleanswers>true</shuffleanswers>
+    <correctfeedback format="html"><text>Bonne réponse.</text></correctfeedback>
+    <partiallycorrectfeedback format="html"><text>Partiellement correct.</text></partiallycorrectfeedback>
+    <incorrectfeedback format="html"><text>Réponse incorrecte.</text></incorrectfeedback>
+    <subquestion format="html"><text><![CDATA[Changer le propriétaire]]></text><answer><text>chown</text></answer></subquestion>
+    <subquestion format="html"><text><![CDATA[Changer les permissions]]></text><answer><text>chmod</text></answer></subquestion>
+    <subquestion format="html"><text><![CDATA[Changer le groupe propriétaire]]></text><answer><text>chgrp</text></answer></subquestion>
+  </question>
+
+  <question type="shortanswer">
+    <name><text>LIN-08-RC chmod (droit d'exécution au groupe)</text></name>
+    <questiontext format="html"><text><![CDATA[<p>On veut donner au groupe propriétaire le droit d'exécution sur le fichier <code>text.php</code>. Quelle est la commande ?</p>]]></text></questiontext>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <usecase>0</usecase>
+    <answer fraction="100" format="moodle_auto_format"><text>chmod g+x text.php</text><feedback format="html"><text></text></feedback></answer>
+    <answer fraction="100" format="moodle_auto_format"><text>chmod g+x ./text.php</text><feedback format="html"><text></text></feedback></answer>
+    <answer fraction="100" format="moodle_auto_format"><text>chmod*g+x*text.php</text><feedback format="html"><text></text></feedback></answer>
+  </question>
+
+  <question type="shortanswer">
+    <name><text>LIN-09-RC chown récursif</text></name>
+    <questiontext format="html"><text><![CDATA[<p>On veut changer le propriétaire et le groupe propriétaire du dossier <code>glpi</code> et de tout son contenu (récursif), vers <code>www-data:www-data</code>. Quelle est la commande ?</p>]]></text></questiontext>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <usecase>0</usecase>
+    <answer fraction="100" format="moodle_auto_format"><text>chown -R www-data:www-data glpi</text><feedback format="html"><text></text></feedback></answer>
+    <answer fraction="100" format="moodle_auto_format"><text>chown www-data:www-data -R glpi</text><feedback format="html"><text></text></feedback></answer>
+    <answer fraction="100" format="moodle_auto_format"><text>chown -R www-data:www-data ./glpi</text><feedback format="html"><text></text></feedback></answer>
+    <answer fraction="100" format="moodle_auto_format"><text>chown*-R*www-data:www-data*glpi</text><feedback format="html"><text></text></feedback></answer>
+    <answer fraction="100" format="moodle_auto_format"><text>chown*www-data:www-data*-R*glpi</text><feedback format="html"><text></text></feedback></answer>
+  </question>
+
+  <question type="shortanswer">
+    <name><text>LIN-10-RC Lister avec permissions</text></name>
+    <questiontext format="html"><text><![CDATA[<p>On veut lister les fichiers/répertoires du dossier courant <strong>en affichant les permissions</strong>. Quelle est la commande ?</p>]]></text></questiontext>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <usecase>0</usecase>
+    <answer fraction="100" format="moodle_auto_format"><text>ls -l</text><feedback format="html"><text></text></feedback></answer>
+    <answer fraction="100" format="moodle_auto_format"><text>ls -al</text><feedback format="html"><text></text></feedback></answer>
+    <answer fraction="100" format="moodle_auto_format"><text>ls -la</text><feedback format="html"><text></text></feedback></answer>
+    <answer fraction="100" format="moodle_auto_format"><text>ls -lh</text><feedback format="html"><text></text></feedback></answer>
+    <answer fraction="100" format="moodle_auto_format"><text>ll</text><feedback format="html"><text></text></feedback></answer>
+    <answer fraction="100" format="moodle_auto_format"><text>ls -l *</text><feedback format="html"><text></text></feedback></answer>
+  </question>
+
+  <question type="shortanswer">
+    <name><text>LIN-11-RC Lister un dossier précis</text></name>
+    <questiontext format="html"><text><![CDATA[<p>Le dossier courant est <code>/home/admin1</code>. On veut lister (avec les permissions) le dossier <code>/var/www</code>. Quelle est la commande ?</p>]]></text></questiontext>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <usecase>0</usecase>
+    <answer fraction="100" format="moodle_auto_format"><text>ls -l /var/www</text><feedback format="html"><text></text></feedback></answer>
+    <answer fraction="100" format="moodle_auto_format"><text>ls -al /var/www</text><feedback format="html"><text></text></feedback></answer>
+    <answer fraction="100" format="moodle_auto_format"><text>ls -la /var/www</text><feedback format="html"><text></text></feedback></answer>
+    <answer fraction="100" format="moodle_auto_format"><text>ls -l /var/www/</text><feedback format="html"><text></text></feedback></answer>
+    <answer fraction="100" format="moodle_auto_format"><text>ls -l* /var/www*</text><feedback format="html"><text></text></feedback></answer>
+    <answer fraction="100" format="moodle_auto_format"><text>ls -al* /var/www*</text><feedback format="html"><text></text></feedback></answer>
+  </question>
+
+  <question type="matching">
+    <name><text>LIN-12-APP Commandes usuelles</text></name>
+    <questiontext format="html"><text><![CDATA[<p>Associez chaque commande à son action (dossier courant).</p>]]></text></questiontext>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <shuffleanswers>true</shuffleanswers>
+    <correctfeedback format="html"><text>Bonne réponse.</text></correctfeedback>
+    <partiallycorrectfeedback format="html"><text>Partiellement correct.</text></partiallycorrectfeedback>
+    <incorrectfeedback format="html"><text>Réponse incorrecte.</text></incorrectfeedback>
+    <subquestion format="html"><text><![CDATA[Créer un dossier <code>temp</code> dans le dossier courant]]></text><answer><text>mkdir temp</text></answer></subquestion>
+    <subquestion format="html"><text><![CDATA[Copier <code>fic2.txt</code> vers le sous-dossier <code>dossier1</code>]]></text><answer><text>cp fic2.txt dossier1/</text></answer></subquestion>
+    <subquestion format="html"><text><![CDATA[Copier <code>fic2.txt</code> vers <code>/var/www/dossier1</code>]]></text><answer><text>cp fic2.txt /var/www/dossier1/</text></answer></subquestion>
+    <subquestion format="html"><text><![CDATA[Déplacer <code>fic2.txt</code> vers le sous-dossier <code>dossier1</code>]]></text><answer><text>mv fic2.txt dossier1/fic2.txt</text></answer></subquestion>
+  </question>
+
+  <question type="truefalse">
+    <name><text>LIN-13-VF Distribution = GNU + Linux ?</text></name>
+    <questiontext format="html"><text><![CDATA[<p>Une distribution Linux est-elle <strong>forcément</strong> composée d'une partie GNU <strong>et</strong> d'une partie Linux ?</p>]]></text></questiontext>
+    <generalfeedback format="html"><text><![CDATA[<p>Non : les parties GNU et Linux sont indépendantes. Il existe des systèmes avec Linux sans GNU (ex. <strong>Android</strong>) et des systèmes GNU sans Linux (ex. GNU/Hurd).</p>]]></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>1.0000000</penalty>
+    <hidden>0</hidden>
+    <answer fraction="100" format="moodle_auto_format"><text>false</text><feedback format="html"><text>Correct.</text></feedback></answer>
+    <answer fraction="0" format="moodle_auto_format"><text>true</text><feedback format="html"><text>Incorrect.</text></feedback></answer>
+  </question>
+
+</quiz>
