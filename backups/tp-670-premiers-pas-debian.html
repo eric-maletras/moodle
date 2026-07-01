@@ -37,48 +37,11 @@
     <p>💡 Pour les exercices 4 à 6, vous repasserez root avec <code>su -</code> ; pour revenir à l'utilisateur <code>etudiant</code>, tapez <code>exit</code>.</p>
   </div>
 
-  <h2>🧰 Deux outils indispensables</h2>
+  <h2>🔑 Passer administrateur (root)</h2>
   <div class="card">
-    <strong>🔑 Passer administrateur (root)</strong>
-    <p>Certaines commandes (permissions, installation, /var/www) exigent les droits d'administrateur. On devient root avec :</p>
+    <p>Certaines commandes (création de compte, permissions, installation, /var/www) exigent les droits d'administrateur. On devient root avec :</p>
     <code class="code-block">su -</code>
     <p>Saisissez le <strong>mot de passe root</strong> (défini à l'installation de Debian). L'invite change alors de forme : elle se termine par <code>$</code> pour un utilisateur normal, et par <code>#</code> pour root. Pour revenir à l'utilisateur <code>etudiant</code>, tapez <code>exit</code>.</p>
-  </div>
-  <div class="card">
-    <strong>📝 Éditer un fichier avec nano</strong>
-    <p><code>nano</code> est un éditeur de texte en console. Pour ouvrir (ou créer) un fichier :</p>
-    <code class="code-block">nano fichier.txt</code>
-    <p>On se déplace avec les <strong>flèches</strong>. Les raccourcis utilisent la touche <strong>Ctrl</strong> (notée <code>^</code> en bas de l'écran) :</p>
-    <ul>
-      <li><code>Ctrl</code>+<code>O</code> puis <strong>Entrée</strong> — enregistrer</li>
-      <li><code>Ctrl</code>+<code>X</code> — quitter</li>
-      <li><code>Ctrl</code>+<code>K</code> — couper la ligne · <code>Ctrl</code>+<code>U</code> — la coller</li>
-      <li><code>Ctrl</code>+<code>W</code> — rechercher</li>
-    </ul>
-  </div>
-
-  <h2>🔌 Se connecter en SSH depuis le PC hôte (PuTTY)</h2>
-  <div class="card">
-    <p>Travailler depuis l'hôte avec <strong>PuTTY</strong> est plus confortable que la console de la VM (copier-coller, historique…). Avec <strong>VMware Workstation en NAT</strong>, l'hôte joint directement l'IP de la VM — aucune configuration réseau supplémentaire.</p>
-    <p><strong>1. Installer le serveur SSH sur la VM</strong> (en root) :</p>
-    <code class="code-block">su -
-apt update
-apt install -y openssh-server</code>
-    <p><strong>2. Relever l'adresse IP de la VM :</strong></p>
-    <code class="code-block">ip a</code>
-    <p>Cherchez l'adresse <code>inet</code> de l'interface réseau (souvent <code>ens33</code>) — sous VMware Workstation NAT, elle ressemble à <code>192.168.x.x</code>.</p>
-    <p><strong>3. Se connecter avec PuTTY</strong> (sur l'hôte) :</p>
-    <ul>
-      <li><strong>Host Name</strong> : l'IP relevée (ex. <code>192.168.239.128</code>)</li>
-      <li><strong>Port</strong> : <code>22</code></li>
-      <li><strong>Connection type</strong> : SSH → cliquez sur <strong>Open</strong></li>
-    </ul>
-    <p>Connectez-vous avec le compte <code>etudiant</code> et son mot de passe (par défaut, Debian n'autorise pas la connexion SSH directe en root : connectez-vous en <code>etudiant</code> puis faites <code>su -</code>).</p>
-    <p><strong>4. Mettre le système à jour</strong> (bonne pratique après connexion, en root) :</p>
-    <code class="code-block">su -
-apt update
-apt upgrade -y</code>
-    <p>💡 <code>apt update</code> rafraîchit le catalogue des paquets ; <code>apt upgrade</code> installe les mises à jour disponibles. <code>-y</code> valide automatiquement.</p>
   </div>
 
   <h2>🧭 Ce que l'on va faire</h2>
@@ -145,6 +108,19 @@ mv docs/notes.txt archives/</code>
     <p>💡 <code>cp source destination</code> copie, <code>mv source destination</code> déplace (ou renomme). Vérifiez avec <code>ls docs archives</code>.</p>
   </div>
 
+  <h2>📝 Éditer un fichier avec nano</h2>
+  <div class="card">
+    <p>À partir d'ici, vous aurez parfois besoin d'éditer un fichier. <code>nano</code> est un éditeur de texte en console. Pour ouvrir (ou créer) un fichier :</p>
+    <code class="code-block">nano fichier.txt</code>
+    <p>On se déplace avec les <strong>flèches</strong>. Les raccourcis utilisent la touche <strong>Ctrl</strong> (notée <code>^</code> en bas de l'écran) :</p>
+    <ul>
+      <li><code>Ctrl</code>+<code>O</code> puis <strong>Entrée</strong> — enregistrer</li>
+      <li><code>Ctrl</code>+<code>X</code> — quitter</li>
+      <li><code>Ctrl</code>+<code>K</code> — couper la ligne · <code>Ctrl</code>+<code>U</code> — la coller</li>
+      <li><code>Ctrl</code>+<code>W</code> — rechercher</li>
+    </ul>
+  </div>
+
   <h2>Exercice 4 — Permissions (4 pts)</h2>
   <div class="card">
     <p>Les changements de groupe nécessitent des privilèges : passez <strong>root</strong> le temps de cet exercice.</p>
@@ -202,5 +178,31 @@ chown -R www-data:www-data /var/www/glpi</code>
     <p>Quand tout est terminé, lancez le script de correction <strong>en root</strong> :</p>
     <code class="code-block">python3 check_tp_linux.py</code>
     <p>Le script affiche votre détail par exercice et génère un fichier <code>resultat_tp.json</code> à déposer sur Moodle. Vous pouvez le relancer autant de fois que nécessaire avant le dépôt.</p>
+  </div>
+
+  <div class="hr"></div>
+
+  <h2>🔌 Pour aller plus loin — se connecter en SSH (PuTTY)</h2>
+  <div class="card">
+    <p>Maintenant que vous avez réalisé le TP en tapant les commandes directement dans la console de la VM, voici comment vous y connecter <strong>à distance</strong> depuis le PC hôte avec <strong>PuTTY</strong> — pratique pour les prochains TP. Avec <strong>VMware Workstation en NAT</strong>, l'hôte joint directement l'IP de la VM, sans configuration réseau supplémentaire.</p>
+    <p><strong>1. Installer le serveur SSH sur la VM</strong> (en root) :</p>
+    <code class="code-block">su -
+apt update
+apt install -y openssh-server</code>
+    <p><strong>2. Relever l'adresse IP de la VM :</strong></p>
+    <code class="code-block">ip a</code>
+    <p>Cherchez l'adresse <code>inet</code> de l'interface réseau (souvent <code>ens33</code>) — sous VMware Workstation NAT, elle ressemble à <code>192.168.x.x</code>.</p>
+    <p><strong>3. Se connecter avec PuTTY</strong> (sur l'hôte) :</p>
+    <ul>
+      <li><strong>Host Name</strong> : l'IP relevée (ex. <code>192.168.239.128</code>)</li>
+      <li><strong>Port</strong> : <code>22</code></li>
+      <li><strong>Connection type</strong> : SSH → cliquez sur <strong>Open</strong></li>
+    </ul>
+    <p>Connectez-vous avec le compte <code>etudiant</code> et son mot de passe (par défaut, Debian n'autorise pas la connexion SSH directe en root : connectez-vous en <code>etudiant</code> puis faites <code>su -</code>).</p>
+    <p><strong>4. Mettre le système à jour</strong> (bonne pratique après connexion, en root) :</p>
+    <code class="code-block">su -
+apt update
+apt upgrade -y</code>
+    <p>💡 <code>apt update</code> rafraîchit le catalogue des paquets ; <code>apt upgrade</code> installe les mises à jour disponibles. <code>-y</code> valide automatiquement.</p>
   </div>
 </div>
