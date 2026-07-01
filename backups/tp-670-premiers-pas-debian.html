@@ -110,9 +110,16 @@ mv docs/notes.txt archives/</code>
 
   <h2>📝 Éditer un fichier avec nano</h2>
   <div class="card">
-    <p>À partir d'ici, vous aurez parfois besoin d'éditer un fichier. <code>nano</code> est un éditeur de texte en console. Pour ouvrir un fichier (ou le créer s'il n'existe pas encore) — ici <code>fichier.txt</code> n'est qu'un <strong>nom d'exemple</strong>, à remplacer par le fichier voulu :</p>
-    <code class="code-block">nano fichier.txt</code>
-    <p>On se déplace avec les <strong>flèches</strong>. Les raccourcis utilisent la touche <strong>Ctrl</strong> (notée <code>^</code> en bas de l'écran) :</p>
+    <p>À partir d'ici, vous aurez parfois besoin d'éditer un fichier. <code>nano</code> est un éditeur de texte en console. Faisons un essai : le fichier <code>essai-nano.txt</code> sera créé dans votre dossier personnel (hors de <code>tp-linux</code>, il n'entre pas dans la notation).</p>
+    <p><strong>1. Ouvrir le fichier</strong> (nano le crée s'il n'existe pas) :</p>
+    <code class="code-block">nano ~/essai-nano.txt</code>
+    <p><strong>2. Saisir quelques lignes</strong>, par exemple :</p>
+    <code class="code-block">Ceci est mon premier fichier edite avec nano.
+BTS SIO SISR</code>
+    <p><strong>3. Enregistrer puis quitter</strong> : <code>Ctrl</code>+<code>O</code> puis <strong>Entrée</strong> pour enregistrer, puis <code>Ctrl</code>+<code>X</code> pour quitter.</p>
+    <p><strong>4. Afficher le contenu</strong> sans rouvrir l'éditeur, avec <code>cat</code> :</p>
+    <code class="code-block">cat ~/essai-nano.txt</code>
+    <p>💡 Dans nano, on se déplace avec les <strong>flèches</strong>. Les raccourcis utilisent la touche <strong>Ctrl</strong> (notée <code>^</code> en bas de l'écran) :</p>
     <ul>
       <li><code>Ctrl</code>+<code>O</code> puis <strong>Entrée</strong> — enregistrer</li>
       <li><code>Ctrl</code>+<code>X</code> — quitter</li>
