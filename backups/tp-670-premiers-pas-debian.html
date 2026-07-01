@@ -1,0 +1,152 @@
+<div class="sio">
+  <div class="banner">
+    <div class="eyebrow">BTS SIO SISR · Linux / Debian · TP guidé</div>
+    <h1>TP — Premiers pas sur un serveur Debian</h1>
+  </div>
+
+  <div class="note-accent">
+    <strong>📘 Référentiel BTS SIO SISR</strong><br>
+    <strong>Compétences :</strong><br>
+    • <strong>B2.2</strong> - Installer, tester et déployer une solution d'infrastructure<br>
+    • <strong>B2.3</strong> - Exploiter, dépanner et superviser une solution d'infrastructure<br>
+    • <strong>B3.1</strong> - Protéger les données (gestion des permissions)<br>
+  </div>
+
+  <div class="grid grid-3">
+    <div class="card">
+      <strong>🎯 Objectif</strong>
+      <p>Préparer un serveur Debian à l'hébergement de l'application GLPI : arborescence de travail, fichiers, permissions, paquets et déploiement d'une archive.</p>
+    </div>
+    <div class="card">
+      <strong>⏱️ Durée</strong>
+      <p>1 h 30 — notation automatisée sur 20 points.</p>
+    </div>
+    <div class="card">
+      <strong>🔧 Environnement</strong>
+      <p>VM Debian 12 sans interface graphique, utilisateur <code>etudiant</code>, accès root. Connexion Internet requise.</p>
+    </div>
+  </div>
+
+  <h2>🧭 Ce que l'on va faire</h2>
+  <div class="card">
+    <p>Vous allez transformer une VM Debian « nue » en un serveur prêt à héberger GLPI, en 6 étapes. Chaque étape correspond à un exercice noté :</p>
+    <ol>
+      <li><strong>Arborescence de travail</strong> — créer les dossiers et fichiers de base (<code>mkdir</code>, <code>touch</code>).</li>
+      <li><strong>Redirections</strong> — écrire dans des fichiers avec <code>echo</code> et les redirections <code>&gt;</code> / <code>&gt;&gt;</code>.</li>
+      <li><strong>Copier / déplacer</strong> — organiser les fichiers (<code>cp</code>, <code>mv</code>).</li>
+      <li><strong>Permissions</strong> — régler les droits en notation octale et changer le groupe propriétaire (<code>chmod</code>, <code>chgrp</code>).</li>
+      <li><strong>Paquets</strong> — mettre à jour et installer des logiciels (<code>apt</code>).</li>
+      <li><strong>Déploiement de GLPI</strong> — télécharger et extraire l'application dans <code>/var/www</code> (<code>wget</code>, <code>tar</code>, <code>chown</code>).</li>
+    </ol>
+    <p>Enfin, vous lancerez un <strong>script de correction automatique</strong> qui vérifie l'état de votre VM et produit le fichier à déposer sur Moodle.</p>
+  </div>
+
+  <div class="note-warn">
+    <strong>⚠️ Règles du TP</strong>
+    <p>Tout se fait <strong>en ligne de commande</strong>. Les noms de fichiers, dossiers et permissions doivent être <strong>strictement identiques</strong> à l'énoncé : le script de correction vérifie l'état exact de votre VM. Respectez les majuscules/minuscules. Tapez vous-même les commandes plutôt que de les copier-coller : c'est ainsi que l'on apprend.</p>
+  </div>
+
+  <div class="hr"></div>
+
+  <h2>Exercice 1 — Arborescence de travail (3 pts)</h2>
+  <div class="card">
+    <p>Connecté en tant qu'utilisateur <code>etudiant</code> :</p>
+    <ol>
+      <li>Dans votre répertoire personnel, créez un dossier <code>tp-linux</code>.</li>
+      <li>Dans <code>tp-linux</code>, créez trois sous-dossiers : <code>docs</code>, <code>scripts</code> et <code>archives</code>.</li>
+      <li>Dans <code>docs</code>, créez un fichier vide nommé <code>notes.txt</code>.</li>
+    </ol>
+    <p><strong>Commandes :</strong></p>
+    <code class="code-block">cd ~
+mkdir tp-linux
+cd tp-linux
+mkdir docs scripts archives
+touch docs/notes.txt</code>
+    <p>💡 <code>~</code> désigne votre dossier personnel (<code>/home/etudiant</code>). <code>mkdir</code> accepte plusieurs dossiers d'un coup. <code>touch</code> crée un fichier vide.</p>
+  </div>
+
+  <h2>Exercice 2 — Redirections (3 pts)</h2>
+  <div class="card">
+    <ol>
+      <li>Dans <code>tp-linux</code>, créez un fichier <code>identite.txt</code> contenant votre nom et prénom, <strong>en une seule commande</strong> avec <code>echo</code> et une redirection.</li>
+      <li>Ajoutez (sans écraser !) une seconde ligne contenant exactement : <code>BTS SIO SISR</code></li>
+    </ol>
+    <p><strong>Commandes</strong> (remplacez <code>Nom Prénom</code> par le vôtre) :</p>
+    <code class="code-block">cd ~/tp-linux
+echo "Nom Prénom" &gt; identite.txt
+echo "BTS SIO SISR" &gt;&gt; identite.txt</code>
+    <p>💡 <code>&gt;</code> <strong>écrase</strong> le fichier (le crée s'il n'existe pas), <code>&gt;&gt;</code> <strong>ajoute</strong> à la fin. Vérifiez le résultat avec <code>cat identite.txt</code>.</p>
+  </div>
+
+  <h2>Exercice 3 — Copier, déplacer (3 pts)</h2>
+  <div class="card">
+    <ol>
+      <li>Copiez <code>identite.txt</code> dans <code>docs/</code> sous le nom <code>identite-copie.txt</code>.</li>
+      <li>Déplacez <code>docs/notes.txt</code> dans <code>archives/</code> (il ne doit plus exister dans <code>docs</code>).</li>
+    </ol>
+    <p><strong>Commandes :</strong></p>
+    <code class="code-block">cd ~/tp-linux
+cp identite.txt docs/identite-copie.txt
+mv docs/notes.txt archives/</code>
+    <p>💡 <code>cp source destination</code> copie, <code>mv source destination</code> déplace (ou renomme). Vérifiez avec <code>ls docs archives</code>.</p>
+  </div>
+
+  <h2>Exercice 4 — Permissions (4 pts)</h2>
+  <div class="card">
+    <p>Les changements de groupe nécessitent des privilèges : passez <strong>root</strong> le temps de cet exercice.</p>
+    <ol>
+      <li>Donnez à <code>tp-linux/identite.txt</code> : lecture/écriture pour le propriétaire, lecture seule pour le groupe, <strong>aucun droit</strong> pour les autres.</li>
+      <li>Donnez au dossier <code>tp-linux/scripts</code> : tous les droits pour le propriétaire, lecture + traversée pour le groupe, aucun droit pour les autres.</li>
+      <li>Changez le <strong>groupe propriétaire</strong> de <code>docs/identite-copie.txt</code> pour <code>www-data</code>.</li>
+    </ol>
+    <p><strong>Rappel octal</strong> — chaque chiffre = somme de r(4) + w(2) + x(1) :</p>
+    <code class="code-block">rw- r-- ---   =  6 4 0   →  640   (identite.txt)
+rwx r-x ---   =  7 5 0   →  750   (dossier scripts)</code>
+    <p><strong>Commandes</strong> (en root) :</p>
+    <code class="code-block">su -
+cd /home/etudiant/tp-linux
+chmod 640 identite.txt
+chmod 750 scripts
+chgrp www-data docs/identite-copie.txt</code>
+    <p>💡 Vérifiez avec <code>ls -l</code> (fichiers) et <code>ls -ld scripts</code> (dossier). Restez en root pour les exercices 5 et 6.</p>
+  </div>
+
+  <h2>Exercice 5 — Gestion des paquets (2 pts)</h2>
+  <div class="card">
+    <ol>
+      <li>Mettez à jour la liste des paquets disponibles.</li>
+      <li>Installez les paquets <code>wget</code> et <code>tree</code>.</li>
+      <li>Vérifiez avec <code>tree</code> que votre arborescence correspond à celle des exercices 1 à 3.</li>
+    </ol>
+    <p><strong>Commandes</strong> (en root) :</p>
+    <code class="code-block">apt update
+apt install -y wget tree
+tree /home/etudiant/tp-linux</code>
+    <p>💡 <code>apt update</code> rafraîchit le catalogue, <code>apt install</code> installe. L'option <code>-y</code> répond « oui » automatiquement.</p>
+  </div>
+
+  <h2>Exercice 6 — Déploiement de GLPI (5 pts)</h2>
+  <div class="card">
+    <p>Toujours en root :</p>
+    <ol>
+      <li>Téléchargez l'archive GLPI <strong>directement dans <code>/var/www</code></strong>.</li>
+      <li>Extrayez-la de façon à obtenir le dossier <code>/var/www/glpi</code>.</li>
+      <li>Donnez récursivement <code>/var/www/glpi</code> à l'utilisateur <strong>et</strong> au groupe <code>www-data</code>.</li>
+    </ol>
+    <p><strong>Commandes :</strong></p>
+    <code class="code-block">cd /var/www
+wget https://github.com/glpi-project/glpi/releases/download/10.0.6/glpi-10.0.6.tgz
+tar -xvf glpi-10.0.6.tgz
+chown -R www-data:www-data /var/www/glpi</code>
+    <p>💡 En se plaçant dans <code>/var/www</code> avant l'extraction, <code>tar</code> y crée le dossier <code>glpi/</code>. Variantes équivalentes : <code>wget -P /var/www &lt;url&gt;</code> pour choisir la destination, et <code>tar -xvf archive.tgz -C /var/www</code> pour extraire ailleurs que dans le dossier courant. <code>chown -R utilisateur:groupe</code> applique récursivement le propriétaire et le groupe.</p>
+  </div>
+
+  <div class="hr"></div>
+
+  <div class="note-ok">
+    <strong>✅ Validation</strong>
+    <p>Quand tout est terminé, lancez le script de correction <strong>en root</strong> :</p>
+    <code class="code-block">python3 check_tp_linux.py</code>
+    <p>Le script affiche votre détail par exercice et génère un fichier <code>resultat_tp.json</code> à déposer sur Moodle. Vous pouvez le relancer autant de fois que nécessaire avant le dépôt.</p>
+  </div>
+</div>
