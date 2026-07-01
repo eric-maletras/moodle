@@ -27,9 +27,19 @@
     </div>
   </div>
 
+  <h2>⚙️ Préparation — Créer l'utilisateur etudiant</h2>
+  <div class="card">
+    <p>Les exercices se font avec un compte nommé <code>etudiant</code>. S'il n'existe pas encore sur la VM, créez-le <strong>en root</strong> :</p>
+    <code class="code-block">adduser etudiant</code>
+    <p>La commande demande un <strong>mot de passe</strong> (à saisir deux fois), puis quelques informations facultatives (nom complet, etc.) : appuyez sur <strong>Entrée</strong> pour les laisser vides et confirmez par <code>o</code>. Elle crée aussi le dossier personnel <code>/home/etudiant</code>.</p>
+    <p>Connectez-vous ensuite en tant qu'<code>etudiant</code> :</p>
+    <code class="code-block">su - etudiant</code>
+    <p>💡 Pour les exercices 4 à 6, vous repasserez root avec <code>su -</code> ; pour revenir à l'utilisateur <code>etudiant</code>, tapez <code>exit</code>.</p>
+  </div>
+
   <h2>🧭 Ce que l'on va faire</h2>
   <div class="card">
-    <p>Vous allez transformer une VM Debian « nue » en un serveur prêt à héberger GLPI, en 6 étapes. Chaque étape correspond à un exercice noté :</p>
+    <p>Vous allez transformer une VM Debian « nue » en un serveur prêt à héberger GLPI. Après avoir créé le compte <code>etudiant</code> (ci-dessus), vous enchaînerez 6 étapes, chacune correspondant à un exercice noté :</p>
     <ol>
       <li><strong>Arborescence de travail</strong> — créer les dossiers et fichiers de base (<code>mkdir</code>, <code>touch</code>).</li>
       <li><strong>Redirections</strong> — écrire dans des fichiers avec <code>echo</code> et les redirections <code>&gt;</code> / <code>&gt;&gt;</code>.</li>
