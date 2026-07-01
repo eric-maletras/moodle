@@ -59,25 +59,18 @@
 
   <h2>🔌 Se connecter en SSH depuis le PC hôte (PuTTY)</h2>
   <div class="card">
-    <p>Travailler depuis l'hôte avec <strong>PuTTY</strong> est plus confortable que la console de la VM (copier-coller, historique…). Voici comment s'y connecter alors que la VM est en <strong>NAT</strong>.</p>
+    <p>Travailler depuis l'hôte avec <strong>PuTTY</strong> est plus confortable que la console de la VM (copier-coller, historique…). Avec <strong>VMware Workstation en NAT</strong>, l'hôte joint directement l'IP de la VM — aucune configuration réseau supplémentaire.</p>
     <p><strong>1. Installer le serveur SSH sur la VM</strong> (en root) :</p>
     <code class="code-block">su -
 apt update
 apt install -y openssh-server</code>
     <p><strong>2. Relever l'adresse IP de la VM :</strong></p>
     <code class="code-block">ip a</code>
-    <p>Cherchez l'adresse <code>inet</code> de l'interface réseau (souvent <code>enp0s3</code>) — en NAT VirtualBox, c'est typiquement <code>10.0.2.15</code>.</p>
-    <div class="note-warn">
-      <strong>⚠️ Spécificité NAT</strong>
-      <p>En NAT, l'hôte ne peut <strong>pas</strong> joindre directement cette IP <code>10.0.2.15</code>. Il faut une <strong>redirection de port</strong> dans l'hyperviseur. Sous <strong>VirtualBox</strong> : VM éteinte → <em>Configuration → Réseau → Adaptateur 1 (NAT) → Avancé → Redirection de ports</em>, puis ajoutez une règle :</p>
-      <code class="code-block">Nom : ssh   Protocole : TCP
-IP hôte : 127.0.0.1   Port hôte : 2222
-IP invité : (vide)    Port invité : 22</code>
-    </div>
+    <p>Cherchez l'adresse <code>inet</code> de l'interface réseau (souvent <code>ens33</code>) — sous VMware Workstation NAT, elle ressemble à <code>192.168.x.x</code>.</p>
     <p><strong>3. Se connecter avec PuTTY</strong> (sur l'hôte) :</p>
     <ul>
-      <li><strong>Host Name</strong> : <code>127.0.0.1</code></li>
-      <li><strong>Port</strong> : <code>2222</code></li>
+      <li><strong>Host Name</strong> : l'IP relevée (ex. <code>192.168.239.128</code>)</li>
+      <li><strong>Port</strong> : <code>22</code></li>
       <li><strong>Connection type</strong> : SSH → cliquez sur <strong>Open</strong></li>
     </ul>
     <p>Connectez-vous avec le compte <code>etudiant</code> et son mot de passe (par défaut, Debian n'autorise pas la connexion SSH directe en root : connectez-vous en <code>etudiant</code> puis faites <code>su -</code>).</p>
