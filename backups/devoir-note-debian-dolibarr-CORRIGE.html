@@ -1,0 +1,83 @@
+<div class="sio">
+  <div class="banner">
+    <div class="eyebrow">BTS SIO SISR · Linux / Debian · CORRIGÉ</div>
+    <h1>Corrigé — Devoir « Déploiement d'un serveur Debian pour Dolibarr »</h1>
+  </div>
+
+  <div class="note-warn">
+    <strong>🔒 Document enseignant</strong>
+    <p>Corrigé de référence. Une solution possible est donnée par exercice ; d'autres formulations équivalentes sont acceptables (chemins absolus/relatifs, options équivalentes…). À ne pas diffuser avant le rendu.</p>
+  </div>
+
+  <div class="hr"></div>
+
+  <h2>Exercice 1 — Espace de travail (3 pts)</h2>
+  <div class="card">
+    <p>En tant qu'utilisateur <code>etudiant</code> :</p>
+    <code class="code-block">cd ~
+mkdir atelier-serveur
+cd atelier-serveur
+mkdir documentation sauvegardes depots
+touch documentation/journal.txt</code>
+    <p>Attendu : <code>~/atelier-serveur</code> avec les 3 sous-dossiers, et <code>documentation/journal.txt</code> (vide).</p>
+  </div>
+
+  <h2>Exercice 2 — Redirections (3 pts)</h2>
+  <div class="card">
+    <code class="code-block">cd ~/atelier-serveur
+echo "Nom Prénom" &gt; technicien.txt
+echo "Administration systeme et reseau" &gt;&gt; technicien.txt</code>
+    <p><code>&gt;</code> crée/écrase le fichier, <code>&gt;&gt;</code> ajoute la 2<sup>e</sup> ligne sans écraser. Contrôle : <code>cat technicien.txt</code> (2 lignes).</p>
+  </div>
+
+  <h2>Exercice 3 — Copier, déplacer (3 pts)</h2>
+  <div class="card">
+    <code class="code-block">cd ~/atelier-serveur
+cp technicien.txt documentation/technicien-sauvegarde.txt
+mv documentation/journal.txt sauvegardes/</code>
+    <p>Après coup : <code>technicien-sauvegarde.txt</code> existe dans <code>documentation/</code>, et <code>journal.txt</code> est dans <code>sauvegardes/</code> (plus dans <code>documentation/</code>).</p>
+  </div>
+
+  <h2>Exercice 4 — Permissions (4 pts)</h2>
+  <div class="card">
+    <p><strong>Traduction octale</strong> — r(4) + w(2) + x(1) :</p>
+    <code class="code-block">rw- rw- ---   =  6 6 0   →  660   (technicien.txt)
+rwx --- ---   =  7 0 0   →  700   (dossier depots)</code>
+    <p><strong>Commandes</strong> (en root) :</p>
+    <code class="code-block">su -
+cd /home/etudiant/atelier-serveur
+chmod 660 technicien.txt
+chmod 700 depots
+chgrp www-data documentation/technicien-sauvegarde.txt</code>
+    <p>Contrôle : <code>ls -l technicien.txt</code>, <code>ls -ld depots</code>, <code>ls -l documentation/technicien-sauvegarde.txt</code> (groupe <code>www-data</code>).</p>
+  </div>
+
+  <h2>Exercice 5 — Gestion des paquets (2 pts)</h2>
+  <div class="card">
+    <code class="code-block">apt update
+apt install -y wget htop
+ls -R /home/etudiant/atelier-serveur</code>
+    <p><code>ls -R</code> affiche l'arborescence récursivement (équivalent de <code>tree</code> sans l'installer). On doit y retrouver la structure des exercices 1 à 3.</p>
+  </div>
+
+  <h2>Exercice 6 — Déploiement de Dolibarr (5 pts)</h2>
+  <div class="card">
+    <p>En root :</p>
+    <code class="code-block">cd /var/www
+wget https://github.com/Dolibarr/dolibarr/archive/refs/tags/19.0.3.tar.gz
+tar -xvf 19.0.3.tar.gz
+mv dolibarr-19.0.3 dolibarr
+chown -R www-data:www-data /var/www/dolibarr</code>
+    <p>L'URL enregistre le fichier <code>19.0.3.tar.gz</code> ; l'extraction crée <code>/var/www/dolibarr-19.0.3</code>, renommé en <code>/var/www/dolibarr</code>. Enfin, propriétaire et groupe passent récursivement à <code>www-data</code>.</p>
+    <p>💡 Variantes équivalentes : <code>wget -P /var/www &lt;url&gt;</code> pour choisir la destination, ou <code>tar -xvf archive.tar.gz -C /var/www</code> pour extraire ailleurs que dans le dossier courant.</p>
+  </div>
+
+  <div class="hr"></div>
+
+  <div class="note-ok">
+    <strong>✅ Validation</strong>
+    <p>Le script de correction (en root) vérifie l'ensemble et produit le fichier de résultat :</p>
+    <code class="code-block">python3 check_devoir_debian.py</code>
+    <p>Génère <code>resultat_devoir.json</code> (à déposer sur Moodle).</p>
+  </div>
+</div>
