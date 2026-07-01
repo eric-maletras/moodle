@@ -171,7 +171,8 @@ tree /home/etudiant/tp-linux</code>
       <li>Donnez récursivement <code>/var/www/glpi</code> à l'utilisateur <strong>et</strong> au groupe <code>www-data</code>.</li>
     </ol>
     <p><strong>Commandes :</strong></p>
-    <code class="code-block">cd /var/www
+    <code class="code-block">mkdir -p /var/www
+cd /var/www
 wget https://github.com/glpi-project/glpi/releases/download/10.0.6/glpi-10.0.6.tgz
 tar -xvf glpi-10.0.6.tgz
 chown -R www-data:www-data /var/www/glpi</code>

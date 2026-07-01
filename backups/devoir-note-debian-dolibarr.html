@@ -88,6 +88,7 @@
   <div class="card">
     <p>Toujours en root :</p>
     <ol>
+      <li>Assurez-vous que le dossier <code>/var/www</code> existe (créez-le au besoin).</li>
       <li>Téléchargez l'archive Dolibarr <strong>directement dans <code>/var/www</code></strong> (sans la déplacer ensuite) :<br><code>https://github.com/Dolibarr/dolibarr/archive/refs/tags/19.0.3.tar.gz</code></li>
       <li>Extrayez l'archive, puis faites en sorte d'obtenir le dossier <code>/var/www/dolibarr</code>. <strong>Attention</strong> : l'archive se décompresse dans un dossier versionné (<code>dolibarr-19.0.3</code>) — à renommer.</li>
       <li>Donnez récursivement le dossier <code>/var/www/dolibarr</code> à l'utilisateur <strong>et</strong> au groupe <code>www-data</code>.</li>
