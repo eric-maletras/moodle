@@ -37,6 +37,57 @@
     <p>💡 Pour les exercices 4 à 6, vous repasserez root avec <code>su -</code> ; pour revenir à l'utilisateur <code>etudiant</code>, tapez <code>exit</code>.</p>
   </div>
 
+  <h2>🧰 Deux outils indispensables</h2>
+  <div class="card">
+    <strong>🔑 Passer administrateur (root)</strong>
+    <p>Certaines commandes (permissions, installation, /var/www) exigent les droits d'administrateur. On devient root avec :</p>
+    <code class="code-block">su -</code>
+    <p>Saisissez le <strong>mot de passe root</strong> (défini à l'installation de Debian). L'invite change alors de forme : elle se termine par <code>$</code> pour un utilisateur normal, et par <code>#</code> pour root. Pour revenir à l'utilisateur <code>etudiant</code>, tapez <code>exit</code>.</p>
+  </div>
+  <div class="card">
+    <strong>📝 Éditer un fichier avec nano</strong>
+    <p><code>nano</code> est un éditeur de texte en console. Pour ouvrir (ou créer) un fichier :</p>
+    <code class="code-block">nano fichier.txt</code>
+    <p>On se déplace avec les <strong>flèches</strong>. Les raccourcis utilisent la touche <strong>Ctrl</strong> (notée <code>^</code> en bas de l'écran) :</p>
+    <ul>
+      <li><code>Ctrl</code>+<code>O</code> puis <strong>Entrée</strong> — enregistrer</li>
+      <li><code>Ctrl</code>+<code>X</code> — quitter</li>
+      <li><code>Ctrl</code>+<code>K</code> — couper la ligne · <code>Ctrl</code>+<code>U</code> — la coller</li>
+      <li><code>Ctrl</code>+<code>W</code> — rechercher</li>
+    </ul>
+  </div>
+
+  <h2>🔌 Se connecter en SSH depuis le PC hôte (PuTTY)</h2>
+  <div class="card">
+    <p>Travailler depuis l'hôte avec <strong>PuTTY</strong> est plus confortable que la console de la VM (copier-coller, historique…). Voici comment s'y connecter alors que la VM est en <strong>NAT</strong>.</p>
+    <p><strong>1. Installer le serveur SSH sur la VM</strong> (en root) :</p>
+    <code class="code-block">su -
+apt update
+apt install -y openssh-server</code>
+    <p><strong>2. Relever l'adresse IP de la VM :</strong></p>
+    <code class="code-block">ip a</code>
+    <p>Cherchez l'adresse <code>inet</code> de l'interface réseau (souvent <code>enp0s3</code>) — en NAT VirtualBox, c'est typiquement <code>10.0.2.15</code>.</p>
+    <div class="note-warn">
+      <strong>⚠️ Spécificité NAT</strong>
+      <p>En NAT, l'hôte ne peut <strong>pas</strong> joindre directement cette IP <code>10.0.2.15</code>. Il faut une <strong>redirection de port</strong> dans l'hyperviseur. Sous <strong>VirtualBox</strong> : VM éteinte → <em>Configuration → Réseau → Adaptateur 1 (NAT) → Avancé → Redirection de ports</em>, puis ajoutez une règle :</p>
+      <code class="code-block">Nom : ssh   Protocole : TCP
+IP hôte : 127.0.0.1   Port hôte : 2222
+IP invité : (vide)    Port invité : 22</code>
+    </div>
+    <p><strong>3. Se connecter avec PuTTY</strong> (sur l'hôte) :</p>
+    <ul>
+      <li><strong>Host Name</strong> : <code>127.0.0.1</code></li>
+      <li><strong>Port</strong> : <code>2222</code></li>
+      <li><strong>Connection type</strong> : SSH → cliquez sur <strong>Open</strong></li>
+    </ul>
+    <p>Connectez-vous avec le compte <code>etudiant</code> et son mot de passe (par défaut, Debian n'autorise pas la connexion SSH directe en root : connectez-vous en <code>etudiant</code> puis faites <code>su -</code>).</p>
+    <p><strong>4. Mettre le système à jour</strong> (bonne pratique après connexion, en root) :</p>
+    <code class="code-block">su -
+apt update
+apt upgrade -y</code>
+    <p>💡 <code>apt update</code> rafraîchit le catalogue des paquets ; <code>apt upgrade</code> installe les mises à jour disponibles. <code>-y</code> valide automatiquement.</p>
+  </div>
+
   <h2>🧭 Ce que l'on va faire</h2>
   <div class="card">
     <p>Vous allez transformer une VM Debian « nue » en un serveur prêt à héberger GLPI. Après avoir créé le compte <code>etudiant</code> (ci-dessus), vous enchaînerez 6 étapes, chacune correspondant à un exercice noté :</p>
