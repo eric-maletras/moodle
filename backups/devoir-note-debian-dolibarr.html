@@ -1,0 +1,106 @@
+<div class="sio">
+  <div class="banner">
+    <div class="eyebrow">BTS SIO SISR · Linux / Debian · Devoir noté</div>
+    <h1>Devoir — Déploiement d'un serveur Debian pour l'ERP Dolibarr</h1>
+  </div>
+
+  <div class="note-accent">
+    <strong>📘 Référentiel BTS SIO SISR</strong><br>
+    <strong>Compétences :</strong><br>
+    • <strong>B2.2</strong> - Installer, tester et déployer une solution d'infrastructure<br>
+    • <strong>B2.3</strong> - Exploiter, dépanner et superviser une solution d'infrastructure<br>
+    • <strong>B3.1</strong> - Protéger les données (gestion des permissions)<br>
+  </div>
+
+  <div class="grid grid-3">
+    <div class="card">
+      <strong>🎯 Objectif</strong>
+      <p>Préparer un serveur Debian à l'hébergement de l'ERP <strong>Dolibarr</strong> : espace de travail, fichiers, permissions, paquets et déploiement d'une archive.</p>
+    </div>
+    <div class="card">
+      <strong>⏱️ Durée</strong>
+      <p>1 h 30 — notation automatisée sur 20 points.</p>
+    </div>
+    <div class="card">
+      <strong>🔧 Environnement</strong>
+      <p>VM Debian 12 sans interface graphique, utilisateur <code>etudiant</code>, accès root. Connexion Internet requise.</p>
+    </div>
+  </div>
+
+  <div class="note-warn">
+    <strong>⚠️ Règles du devoir</strong>
+    <p>Tout se fait <strong>en ligne de commande</strong>. Les noms de fichiers, dossiers et permissions doivent être <strong>strictement identiques</strong> à l'énoncé : un script de correction vérifiera l'état exact de votre VM. Respectez les majuscules/minuscules. Aucune commande n'est fournie : à vous de mobiliser les notions vues en cours.</p>
+  </div>
+
+  <div class="hr"></div>
+
+  <h2>Exercice 1 — Espace de travail (3 pts)</h2>
+  <div class="card">
+    <p>Connecté en tant qu'utilisateur <code>etudiant</code> :</p>
+    <ol>
+      <li>Dans votre répertoire personnel, créez un dossier <code>atelier-serveur</code>.</li>
+      <li>Dans <code>atelier-serveur</code>, créez trois sous-dossiers : <code>documentation</code>, <code>sauvegardes</code> et <code>depots</code>.</li>
+      <li>Dans <code>documentation</code>, créez un fichier vide nommé <code>journal.txt</code>.</li>
+    </ol>
+    <p>💡 Chapitres 4 et 5 : création de dossiers, création de fichier vide, chemins relatifs.</p>
+  </div>
+
+  <h2>Exercice 2 — Redirections (3 pts)</h2>
+  <div class="card">
+    <ol>
+      <li>Dans <code>atelier-serveur</code>, créez un fichier <code>technicien.txt</code> contenant votre nom et prénom, <strong>en une seule commande</strong> avec une redirection.</li>
+      <li>Ajoutez (sans écraser !) une seconde ligne contenant exactement : <code>Administration systeme et reseau</code></li>
+    </ol>
+    <p>💡 Chapitre 6 : <code>&gt;</code> écrase, <code>&gt;&gt;</code> ajoute.</p>
+  </div>
+
+  <h2>Exercice 3 — Copier, déplacer (3 pts)</h2>
+  <div class="card">
+    <ol>
+      <li>Copiez <code>technicien.txt</code> dans <code>documentation/</code> sous le nom <code>technicien-sauvegarde.txt</code>.</li>
+      <li>Déplacez <code>documentation/journal.txt</code> dans <code>sauvegardes/</code> (il ne doit plus exister dans <code>documentation</code>).</li>
+    </ol>
+    <p>💡 Chapitre 5 : copie et déplacement de fichiers.</p>
+  </div>
+
+  <h2>Exercice 4 — Permissions (4 pts)</h2>
+  <div class="card">
+    <p>En root (les changements de groupe nécessitent des privilèges) :</p>
+    <ol>
+      <li>Donnez à <code>atelier-serveur/technicien.txt</code> les permissions : lecture/écriture pour le propriétaire, lecture/écriture pour le groupe, <strong>aucun droit</strong> pour les autres — en <strong>notation octale</strong>.</li>
+      <li>Donnez au dossier <code>atelier-serveur/depots</code> les permissions : tous les droits pour le propriétaire, <strong>aucun droit</strong> pour le groupe ni pour les autres — en notation octale.</li>
+      <li>Changez le <strong>groupe propriétaire</strong> de <code>documentation/technicien-sauvegarde.txt</code> pour le groupe <code>www-data</code>.</li>
+    </ol>
+    <p>💡 Chapitres 7 à 9 : tableau octal, modification des droits, changement de groupe. À vous de traduire les droits demandés en valeur numérique.</p>
+  </div>
+
+  <h2>Exercice 5 — Gestion des paquets (2 pts)</h2>
+  <div class="card">
+    <ol>
+      <li>Mettez à jour la liste des paquets disponibles.</li>
+      <li>Installez les paquets <code>wget</code> et <code>htop</code>.</li>
+      <li>Vérifiez que l'arborescence de <code>atelier-serveur</code> correspond bien à celle des exercices 1 à 3.</li>
+    </ol>
+    <p>💡 Chapitre 10 : mise à jour et installation de paquets. Pour la vérification, une commande d'affichage récursif du contenu d'un dossier suffit.</p>
+  </div>
+
+  <h2>Exercice 6 — Déploiement de Dolibarr (5 pts)</h2>
+  <div class="card">
+    <p>Toujours en root :</p>
+    <ol>
+      <li>Téléchargez l'archive Dolibarr <strong>directement dans <code>/var/www</code></strong> (sans la déplacer ensuite) :<br><code>https://github.com/Dolibarr/dolibarr/archive/refs/tags/19.0.3.tar.gz</code></li>
+      <li>Extrayez l'archive, puis faites en sorte d'obtenir le dossier <code>/var/www/dolibarr</code>. <strong>Attention</strong> : l'archive se décompresse dans un dossier versionné (<code>dolibarr-19.0.3</code>) — à renommer.</li>
+      <li>Donnez récursivement le dossier <code>/var/www/dolibarr</code> à l'utilisateur <strong>et</strong> au groupe <code>www-data</code>.</li>
+    </ol>
+    <p>💡 Chapitres 5, 8 et 11 : téléchargement dans un dossier cible, extraction d'archive <code>.tar.gz</code>, renommage, changement récursif de propriétaire.</p>
+  </div>
+
+  <div class="hr"></div>
+
+  <div class="note-ok">
+    <strong>✅ Validation</strong>
+    <p>Quand tout est terminé, lancez le script de correction <strong>en root</strong> :</p>
+    <p><code>python3 check_devoir_debian.py</code></p>
+    <p>Le script affiche votre détail par exercice et génère un fichier <code>resultat_devoir.json</code> à déposer sur Moodle. Vous pouvez le relancer autant de fois que nécessaire avant le dépôt.</p>
+  </div>
+</div>
